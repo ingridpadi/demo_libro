@@ -34,7 +34,7 @@
             height: 25vh; /* Ocupa el 25% superior de la pantalla */
             min-height: 140px;
             position: relative;
-            z-index: 10; /* Se mantiene por encima del video */
+            z-index: 10;
         }
 
         .gallery-item {
@@ -68,31 +68,32 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Hace que el video se adapte sin deformarse */
+            object-fit: cover;
             z-index: 1;
         }
 
-        /* La imagen se superpone sobre el video */
+        /* --- IMAGEN SUPERPUESTA (+20% MÁS GRANDE) --- */
         .overlay-image {
             position: relative;
             z-index: 2;
-            max-width: 85%; /* Evita que choque con los bordes */
-            max-height: 80%;
-            object-fit: contain; /* Mantiene las proporciones de tu diseño original */
-            pointer-events: none; /* Evita que interfiera con clics */
+            width: 100%;
+            max-width: 102%; /* Aumentado un 20% (antes 85%) */
+            max-height: 96%; /* Aumentado un 20% (antes 80%) */
+            object-fit: contain;
+            pointer-events: none;
         }
 
         /* --- RESPONSIVE MEDIA QUERIES --- */
         @media (max-width: 768px) {
             .top-gallery {
-                grid-template-columns: repeat(2, 1fr); /* Formato 2x2 en móviles */
+                grid-template-columns: repeat(2, 1fr);
                 height: 30vh;
             }
             .hero-video-section {
                 height: 70vh;
             }
             .overlay-image {
-                max-width: 95%; /* Un poco más grande en pantallas compactas */
+                max-width: 100%; /* Ajuste completo para pantallas medianas */
             }
         }
 
