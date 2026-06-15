@@ -48,13 +48,13 @@
             z-index: 1;
         }
 
-        /* --- IMAGEN SUPERPUESTA (AÚN MÁS GRANDE) --- */
+        /* --- IMAGEN SUPERPUESTA (MÁXIMO TAMAÑO DISPONIBLE) --- */
         .overlay-image {
             position: relative;
             z-index: 2;
-            width: 130%;
-            max-width: 145%; /* Se aumentó el límite de tamaño para que luzca más grande */
-            max-height: 100%; 
+            width: 100%;
+            max-width: 135%; /* Se aumentó sustancialmente para que abarque mucho más espacio en pantalla */
+            max-height: 100vh; 
             object-fit: contain;
             pointer-events: none;
         }
@@ -70,8 +70,8 @@
 <body>
 
     <audio autoplay loop>
-        <source src="videoplayback.m4a" type="audio/mp4">
-       
+        <source src="Taylor Swift - Daylight (Official Audio).mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
     </audio>
 
     <main class="hero-video-section">
