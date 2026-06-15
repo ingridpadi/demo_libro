@@ -7,25 +7,18 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Shrikhand&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
 
     <style>
-        /* --- RESET & VARIABLES --- */
+        /* --- RESET & BASE --- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --color-primary-blue: #1e5c74; /* Azul océano profundo */
-            --color-text-white: #ffffff;
-            --font-logo: 'Shrikhand', cursive;
-            --font-sans: 'Montserrat', sans-serif;
-        }
-
         body {
-            font-family: var(--font-sans);
+            font-family: 'Montserrat', sans-serif;
             background-color: #f7f5f0;
             overflow-x: hidden;
             min-height: 100vh;
@@ -47,101 +40,35 @@
             height: 100%;
             background-size: cover;
             background-position: center;
-            transition: transform 0.3s ease;
         }
 
-        /* Imágenes de reemplazo temáticas según la referencia */
-        .item-1 { background-image: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=500&q=80'); } /* Laptop & Café */
-        .item-2 { background-image: url('https://images.unsplash.com/photo-1516414447565-b14be0adf13e?auto=format&fit=crop&w=500&q=80'); } /* Escribiendo en libreta */
-        .item-3 { background-image: url('https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=500&q=80'); } /* Café vertiéndose */
-        .item-4 { background-image: url('https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=500&q=80'); } /* Texto/Libro de cerca */
+        /* Imágenes de la cuadrícula superior */
+        .item-1 { background-image: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=500&q=80'); } 
+        .item-2 { background-image: url('https://images.unsplash.com/photo-1516414447565-b14be0adf13e?auto=format&fit=crop&w=500&q=80'); } 
+        .item-3 { background-image: url('https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=500&q=80'); } 
+        .item-4 { background-image: url('https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=500&q=80'); } 
 
         /* --- HERO SECTION (MAIN) --- */
         .hero-section {
-            flex: 1; /* Ocupa el resto del espacio disponible */
+            flex: 1; /* Expande la sección para ocupar todo el alto restante de la pantalla */
             position: relative;
             width: 100%;
-            
-            /* --- AQUÍ SE REALIZÓ EL REEMPLAZO POR TU RUTA RELATIVA --- */
-            background-image: linear-gradient(rgba(30, 92, 116, 0.15), rgba(30, 92, 116, 0.25)), url('Copia de Ingrid.PNG');
-            
+            background-image: url('Copia de Ingrid.PNG'); /* Tu imagen con el diseño completo integrado */
             background-size: cover;
             background-position: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
-
-        /* --- BRANDING & LOGO --- */
-        .brand-container {
-            color: var(--color-text-white);
-            user-select: none;
-            animation: fadeIn 1.2s ease-out;
-        }
-
-        .logo {
-            font-family: var(--font-logo);
-            font-size: clamp(4.5rem, 12vw, 8.5rem); /* Ajuste fluido de tamaño según pantalla */
-            line-height: 0.85;
-            text-shadow: 2px 4px 15px rgba(0, 0, 0, 0.25);
-            margin-bottom: 10px;
-            letter-spacing: -1px;
-        }
-
-        /* Efecto de onda decorativa simulando el estilo debajo de "Café" */
-        .logo::after {
-            content: "";
-            display: block;
-            width: 70%;
-            height: 8px;
-            background: radial-gradient(circle at 50% 100%, transparent 5px, var(--color-text-white) 6px, var(--color-text-white) 9px, transparent 10px) repeat-x;
-            background-size: 20px 20px;
-            margin: 15px auto 0 auto;
-            opacity: 0.9;
-        }
-
-        .author {
-            font-family: var(--font-sans);
-            font-size: clamp(0.9rem, 2vw, 1.3rem);
-            font-weight: 300;
-            letter-spacing: 2px;
-            opacity: 0.95;
-            margin-top: 15px;
-            text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
-        }
-
-        /* --- ANIMACIONES --- */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         /* --- RESPONSIVE MEDIA QUERIES --- */
         @media (max-width: 768px) {
             .top-gallery {
-                grid-template-columns: repeat(2, 1fr); /* 2x2 en tabletas y móviles grandes */
+                grid-template-columns: repeat(2, 1fr); /* Formato 2x2 en pantallas medianas/móviles */
                 height: 30vh;
-            }
-            .logo::after {
-                background-size: 14px 14px;
-                height: 6px;
             }
         }
 
         @media (max-width: 480px) {
             .top-gallery {
-                height: 20vh; /* Ajuste para pantallas muy pequeñas */
-            }
-            .hero-section {
-                background-position: 65% center; /* Centra mejor la imagen en móviles */
+                height: 20vh; /* Ajuste fino de proporción para celulares pequeños */
             }
         }
     </style>
@@ -155,12 +82,7 @@
         <div class="gallery-item item-4"></div>
     </header>
 
-    <main class="hero-section">
-        <div class="brand-container">
-            <h1 class="logo">azul<br>Café</h1>
-            <p class="author">— Ingrid Padilla</p>
-        </div>
-    </main>
+    <main class="hero-section"></main>
 
 </body>
 </html>
