@@ -33,6 +33,8 @@
             width: 100%;
             height: 25vh; /* Ocupa el 25% superior de la pantalla */
             min-height: 140px;
+            position: relative;
+            z-index: 10; /* Se mantiene por encima del video */
         }
 
         .gallery-item {
@@ -48,27 +50,58 @@
         .item-3 { background-image: url('https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=500&q=80'); } 
         .item-4 { background-image: url('https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=500&q=80'); } 
 
-        /* --- HERO SECTION (MAIN) --- */
-        .hero-section {
-            flex: 1; /* Expande la sección para ocupar todo el alto restante de la pantalla */
+        /* --- HERO SECTION WITH VIDEO BACKGROUND --- */
+        .hero-video-section {
             position: relative;
             width: 100%;
-            background-image: url('Copia de Ingrid.PNG'); /* Tu imagen con el diseño completo integrado */
-            background-size: cover;
-            background-position: center;
+            height: 75vh; /* Ocupa el resto de la pantalla */
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* El video actúa como fondo cubriendo todo el espacio */
+        .bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Hace que el video se adapte sin deformarse */
+            z-index: 1;
+        }
+
+        /* La imagen se superpone sobre el video */
+        .overlay-image {
+            position: relative;
+            z-index: 2;
+            max-width: 85%; /* Evita que choque con los bordes */
+            max-height: 80%;
+            object-fit: contain; /* Mantiene las proporciones de tu diseño original */
+            pointer-events: none; /* Evita que interfiera con clics */
         }
 
         /* --- RESPONSIVE MEDIA QUERIES --- */
         @media (max-width: 768px) {
             .top-gallery {
-                grid-template-columns: repeat(2, 1fr); /* Formato 2x2 en pantallas medianas/móviles */
+                grid-template-columns: repeat(2, 1fr); /* Formato 2x2 en móviles */
                 height: 30vh;
+            }
+            .hero-video-section {
+                height: 70vh;
+            }
+            .overlay-image {
+                max-width: 95%; /* Un poco más grande en pantallas compactas */
             }
         }
 
         @media (max-width: 480px) {
             .top-gallery {
-                height: 20vh; /* Ajuste fino de proporción para celulares pequeños */
+                height: 20vh; 
+            }
+            .hero-video-section {
+                height: 80vh;
             }
         }
     </style>
@@ -82,7 +115,15 @@
         <div class="gallery-item item-4"></div>
     </header>
 
-    <main class="hero-section"></main>
+    <main class="hero-video-section">
+        
+        <video class="bg-video" autoplay muted loop playsinline>
+            <source src="PLAYA.mp4" type="video/mp4">
+        </video>
+
+        <img src="Copia de Ingrid.PNG" alt="Branding Azul Café" class="overlay-image">
+
+    </main>
 
 </body>
 </html>
