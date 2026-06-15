@@ -20,41 +20,17 @@
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: #f7f5f0;
-            overflow-x: hidden;
+            overflow: hidden; /* Evita scrolls innecesarios al no haber galería */
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* --- TOP GALLERY GRID --- */
-        .top-gallery {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            width: 100%;
-            height: 25vh; /* Ocupa el 25% superior de la pantalla */
-            min-height: 140px;
-            position: relative;
-            z-index: 10;
-        }
-
-        .gallery-item {
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-        }
-
-        /* Imágenes de la cuadrícula superior */
-        .item-1 { background-image: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=500&q=80'); } 
-        .item-2 { background-image: url('https://images.unsplash.com/photo-1516414447565-b14be0adf13e?auto=format&fit=crop&w=500&q=80'); } 
-        .item-3 { background-image: url('https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=500&q=80'); } 
-        .item-4 { background-image: url('https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=500&q=80'); } 
-
         /* --- HERO SECTION WITH VIDEO BACKGROUND --- */
         .hero-video-section {
             position: relative;
             width: 100%;
-            height: 75vh; /* Ocupa el resto de la pantalla */
+            height: 100vh; /* Ahora ocupa el 100% de la pantalla al no tener la galería */
             overflow: hidden;
             display: flex;
             justify-content: center;
@@ -72,49 +48,31 @@
             z-index: 1;
         }
 
-        /* --- IMAGEN SUPERPUESTA (+50% MÁS GRANDE) --- */
+        /* --- IMAGEN SUPERPUESTA --- */
         .overlay-image {
             position: relative;
             z-index: 2;
             width: 100%;
-            max-width: 135%; /* Aumentado un 50% (antes 85%) */
-            max-height: 130%; /* Aumentado un 50% (antes 80%) */
+            max-width: 102%; 
+            max-height: 96%; 
             object-fit: contain;
             pointer-events: none;
         }
 
         /* --- RESPONSIVE MEDIA QUERIES --- */
         @media (max-width: 768px) {
-            .top-gallery {
-                grid-template-columns: repeat(2, 1fr);
-                height: 30vh;
-            }
-            .hero-video-section {
-                height: 70vh;
-            }
             .overlay-image {
-                max-width: 100%; /* Ajuste completo para pantallas medianas */
-            }
-        }
-
-        @media (max-width: 480px) {
-            .top-gallery {
-                height: 20vh; 
-            }
-            .hero-video-section {
-                height: 80vh;
+                max-width: 100%; 
             }
         }
     </style>
 </head>
 <body>
 
-    <header class="top-gallery">
-        <div class="gallery-item item-1"></div>
-        <div class="gallery-item item-2"></div>
-        <div class="gallery-item item-3"></div>
-        <div class="gallery-item item-4"></div>
-    </header>
+    <audio autoplay loop>
+        <source src="videoplayback.m4a" type="audio/mp4">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
 
     <main class="hero-video-section">
         
