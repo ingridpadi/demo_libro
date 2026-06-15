@@ -48,15 +48,41 @@
             z-index: 1;
         }
 
-        /* --- IMAGEN SUPERPUESTA (MÁXIMO TAMAÑO DISPONIBLE) --- */
+        /* --- IMAGEN SUPERPUESTA --- */
         .overlay-image {
             position: relative;
             z-index: 2;
             width: 100%;
-            max-width: 135%; /* Se aumentó sustancialmente para que abarque mucho más espacio en pantalla */
+            max-width: 135%; 
             max-height: 100vh; 
             object-fit: contain;
             pointer-events: none;
+        }
+
+        /* --- MINI REPRODUCTOR INFERIOR --- */
+        .audio-container {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 10; /* Por encima del video y la imagen */
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px); /* Efecto esmerilado elegante */
+            -webkit-backdrop-filter: blur(8px);
+            padding: 6px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            transition: opacity 0.3s ease;
+            opacity: 0.75;
+        }
+
+        .audio-container:hover {
+            opacity: 1; /* Se aclara por completo al pasar el cursor */
+        }
+
+        .audio-container audio {
+            display: block;
+            height: 36px; /* Altura compacta estilo mini */
+            width: 240px; /* Ancho sutil */
         }
 
         /* --- RESPONSIVE MEDIA QUERIES --- */
@@ -64,15 +90,20 @@
             .overlay-image {
                 max-width: 100%; 
             }
+            .audio-container {
+                right: 50%;
+                transform: translateX(50%); /* Lo centra en pantallas móviles */
+                bottom: 15px;
+                width: calc(100% - 40px);
+                max-width: 300px;
+            }
+            .audio-container audio {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-
-    <audio autoplay loop>
-        <source src="Taylor Swift - Daylight (Official Audio).mp3" type="audio/mpeg">
-        Tu navegador no soporta el elemento de audio.
-    </audio>
 
     <main class="hero-video-section">
         
@@ -81,6 +112,13 @@
         </video>
 
         <img src="Copia de Ingrid.PNG" alt="Branding Azul Café" class="overlay-image">
+
+        <div class="audio-container">
+            <audio controls autoplay loop>
+                <source src="Taylor Swift - Daylight (Official Audio).mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
 
     </main>
 
