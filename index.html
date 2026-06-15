@@ -22,7 +22,7 @@
             font-family: 'Montserrat', sans-serif;
             background-color: #051622;
             color: #ffffff;
-            overflow: hidden; /* Controlado por el slider */
+            overflow: hidden;
         }
 
         /* --- CONTENEDOR DESLIZABLE (SCROLL SNAP) --- */
@@ -30,7 +30,7 @@
             width: 100%;
             height: 100vh;
             overflow-y: auto;
-            scroll-snap-type: y proximity; /* Proximidad para manejar el slide pequeño de 1/4 */
+            scroll-snap-type: y proximity;
             scroll-behavior: smooth;
         }
 
@@ -75,10 +75,10 @@
             pointer-events: none;
         }
 
-        /* --- SLIDE 2: CITA FLAUBERT (1/4 de tamaño) --- */
+        /* --- SLIDE 2: CITA FLAUBERT (1/4 DE PANTALLA) --- */
         .quote-section-small {
             width: 100%;
-            height: 25vh; /* Ajustado a 1/4 del slide */
+            height: 25vh;
             min-height: 180px;
             background-image: linear-gradient(rgba(11, 34, 48, 0.6), rgba(11, 34, 48, 0.8)), url('https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1000&q=80');
             background-size: cover;
@@ -105,23 +105,35 @@
             opacity: 0.8;
         }
 
-        /* --- SLIDE 3: ¿QUIÉN SOY? --- */
+        /* --- SLIDE 3: ¿QUIÉN SOY? + INTERACTIVIDAD DE CARTA --- */
         .who-am-i-section {
-            background-image: linear-gradient(rgba(5, 22, 34, 0.4), rgba(5, 22, 34, 0.2)), url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1800&q=80');
+            background-image: linear-gradient(rgba(5, 22, 34, 0.5), rgba(5, 22, 34, 0.3)), url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1800&q=80');
             background-size: cover;
             background-position: center;
             flex-direction: column;
+            padding: 20px;
         }
 
         .who-title {
             font-size: clamp(2.5rem, 6vw, 4.5rem);
             font-weight: 800;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            transition: opacity 0.4s, transform 0.4s;
         }
 
-        /* Representación visual del Sobre con Corazón */
-        .envelope-card {
+        /* Contenedor interactivo */
+        .interactive-envelope-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 850px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* BOTÓN SOBRE (Vista Inicial) */
+        .envelope-button {
             background-color: #ffffff;
             width: 320px;
             height: 220px;
@@ -131,23 +143,118 @@
             align-items: center;
             position: relative;
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            animation: float 4s ease-in-out infinite;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 10;
         }
 
-        /* Triángulo superior del sobre */
-        .envelope-card::after {
+        .envelope-button::after {
             content: '';
             position: absolute;
             top: 0;
             border-left: 160px solid transparent;
             border-right: 160px solid transparent;
-            border-top: 100px solid rgba(0,0,0,0.05);
+            border-top: 100px solid rgba(0,0,0,0.06);
+        }
+
+        .envelope-button:hover {
+            transform: scale(1.05) translateY(-5px);
         }
 
         .heart-icon {
-            color: #0b2230; /* Azul oscuro como el mar */
+            color: #0b2230;
             font-size: 80px;
+            z-index: 12;
+            transition: transform 0.3s ease;
+        }
+
+        .envelope-button:hover .heart-icon {
+            transform: scale(1.1);
+        }
+
+        /* CARTA DESPLEGADA (Oculta por defecto) */
+        .letter-card {
+            background-color: #ffffff;
+            color: #003452; /* Tono azul oscuro idéntico para la tipografía */
+            width: 100%;
+            padding: 40px 50px;
+            border-radius: 4px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+            position: absolute;
+            opacity: 0;
+            transform: scale(0.8) translateY(50px);
+            pointer-events: none;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
             z-index: 5;
+        }
+
+        /* Decoraciones superiores de tu maquetación */
+        .letter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+        .letter-chevron {
+            color: #003452;
+            font-size: 24px;
+            font-weight: 900;
+        }
+
+        .letter-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background-color: #003452;
+            border-radius: 50%;
+        }
+
+        /* Cuerpo de texto de la carta */
+        .letter-body {
+            text-align: center;
+            font-size: clamp(0.9rem, 1.6vw, 1.15rem);
+            line-height: 1.7;
+            font-weight: 600;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .letter-body p {
+            margin-bottom: 15px;
+        }
+        .letter-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* --- ESTADOS ACTIVOS (AL TOCAR EL CORAZÓN) --- */
+        .active-letter .envelope-button {
+            transform: scale(0.5) translateY(-200px);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .active-letter .who-title {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        .active-letter .letter-card {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            pointer-events: auto;
+            position: relative;
+            z-index: 20;
+        }
+
+        /* Botón flotante para cerrar la carta si se desea */
+        .close-letter-btn {
+            cursor: pointer;
         }
 
         /* --- MINI REPRODUCTOR FIJO --- */
@@ -168,16 +275,12 @@
         .audio-player-dock:hover { opacity: 1; }
         .audio-player-dock audio { display: block; height: 36px; width: 240px; }
 
-        /* --- ANIMACIONES --- */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
+        /* --- RESPONSIVE MEDIA QUERIES --- */
         @media (max-width: 768px) {
             .overlay-image { max-width: 100%; }
-            .envelope-card { width: 260px; height: 180px; }
-            .envelope-card::after { border-left-width: 130px; border-right-width: 130px; }
+            .letter-card { padding: 30px 20px; }
+            .envelope-button { width: 260px; height: 180px; }
+            .envelope-button::after { border-left-width: 130px; border-right-width: 130px; }
             .heart-icon { font-size: 60px; }
             .audio-player-dock { right: 50%; transform: translateX(50%); width: 280px; }
         }
@@ -208,15 +311,43 @@
             <p class="quote-author-small">- Gustave Flaubert</p>
         </div>
 
-        <section class="slide-section who-am-i-section">
+        <section class="slide-section who-am-i-section" id="whoSection">
             <h2 class="who-title">¿Quién soy?</h2>
             
-            <div class="envelope-card">
-                <i class="fa-solid fa-heart heart-icon"></i>
+            <div class="interactive-envelope-wrapper">
+                <div class="envelope-button" onclick="toggleLetter()">
+                    <i class="fa-solid fa-heart heart-icon"></i>
+                </div>
+
+                <div class="letter-card">
+                    <div class="letter-header">
+                        <div class="letter-chevron close-letter-btn" onclick="toggleLetter()">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </div>
+                        <div class="letter-dots">
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="letter-body">
+                        <p>Soy hija, hermana, sobrina, nieta, estudiante, amiga... muchas versiones de mí misma.</p>
+                        <p>Hay partes de mí que me han hecho quien soy hoy: algunas bonitas, otras difíciles, pero todas necesarias. Entendí que soy una Ingrid diferente para cada situación, y está bien así. Estoy orgullosa de cada una de ellas, de lo que fui y de lo que soy.</p>
+                        <p>Me amo, en serio. Amo cada versión de mí.</p>
+                        <p>También creo que las personas que me rodean me van formando poquito a poco, dejando algo en mí: energía, emociones, aprendizajes. Y sí, es difícil decir quién soy, porque todavía me estoy definiendo... y quizá eso me tome toda la vida.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
     </div>
+
+    <script>
+        function toggleLetter() {
+            const whoSection = document.getElementById('whoSection');
+            whoSection.classList.toggle('active-letter');
+        }
+    </script>
 
 </body>
 </html>
