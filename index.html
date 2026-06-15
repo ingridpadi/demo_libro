@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
         /* --- RESET & BASE --- */
@@ -19,25 +19,70 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #f7f5f0;
-            overflow: hidden; /* Evita barras de scroll */
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            background-color: #0b2230; /* Azul oscuro profundo de base */
+            color: #ffffff;
+            overflow: hidden;
         }
 
-        /* --- HERO SECTION WITH VIDEO BACKGROUND --- */
-        .hero-video-section {
-            position: relative;
+        /* --- CONTENEDOR DESLIZABLE (SCROLL SNAP) --- */
+        .main-slider {
             width: 100%;
             height: 100vh;
+            overflow-y: auto;
+            scroll-snap-type: y mandatory; /* Fuerza el deslizamiento por secciones completas */
+            scroll-behavior: smooth;
+        }
+
+        .slide-section {
+            width: 100%;
+            height: 100vh;
+            scroll-snap-align: start; /* Alinea cada sección al inicio de la pantalla */
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* --- SECCIÓN 1: HOME (GALERÍA + VIDEO + LOGO EXTRA GRANDE) --- */
+        .home-interface {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        /* Cuadrícula de fotos superior */
+        .top-gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            width: 100%;
+            height: 25vh;
+            min-height: 140px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .gallery-item {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Enlaces a imágenes sugeridas basadas en tu diseño */
+        .item-1 { background-image: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=500&q=80'); } 
+        .item-2 { background-image: url('https://images.unsplash.com/photo-1516414447565-b14be0adf13e?auto=format&fit=crop&w=500&q=80'); } 
+        .item-3 { background-image: url('https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=500&q=80'); } 
+        .item-4 { background-image: url('https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=500&q=80'); } 
+
+        /* Área del video de fondo */
+        .hero-video-container {
+            position: relative;
+            flex: 1;
+            width: 100%;
             overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* El video actúa como fondo cubriendo todo el espacio */
         .bg-video {
             position: absolute;
             top: 0;
@@ -48,79 +93,139 @@
             z-index: 1;
         }
 
-        /* --- IMAGEN SUPERPUESTA --- */
+        /* Imagen de marca superpuesta (Tamaño maximizado) */
         .overlay-image {
             position: relative;
             z-index: 2;
             width: 100%;
-            max-width: 135%; 
-            max-height: 100vh; 
+            max-width: 135%;
+            max-height: 100%;
             object-fit: contain;
             pointer-events: none;
         }
 
-        /* --- MINI REPRODUCTOR INFERIOR --- */
-        .audio-container {
-            position: absolute;
+        /* --- SECCIÓN 2: MAQUETACIÓN DE CITA (FONDO MAR) --- */
+        .quote-interface {
+            background-image: linear-gradient(rgba(11, 34, 48, 0.2), rgba(11, 34, 48, 0.4)), url('https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1800&q=80'); /* Reemplazar por tu fondo marino si lo deseas */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .quote-wrapper {
+            text-align: center;
+            max-width: 900px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .main-quote {
+            font-size: clamp(2rem, 5vw, 4rem); /* Texto fluido y grande */
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 25px;
+            letter-spacing: -0.5px;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+        }
+
+        .quote-author {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            font-weight: 300;
+            letter-spacing: 2px;
+            opacity: 0.9;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        /* --- MINI REPRODUCTOR FIJO --- */
+        .audio-player-dock {
+            position: fixed;
             bottom: 20px;
             right: 20px;
-            z-index: 10; /* Por encima del video y la imagen */
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(8px); /* Efecto esmerilado elegante */
-            -webkit-backdrop-filter: blur(8px);
+            z-index: 100; /* Siempre visible sobre todas las secciones */
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             padding: 6px;
             border-radius: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             transition: opacity 0.3s ease;
-            opacity: 0.75;
+            opacity: 0.8;
         }
 
-        .audio-container:hover {
-            opacity: 1; /* Se aclara por completo al pasar el cursor */
+        .audio-player-dock:hover {
+            opacity: 1;
         }
 
-        .audio-container audio {
+        .audio-player-dock audio {
             display: block;
-            height: 36px; /* Altura compacta estilo mini */
-            width: 240px; /* Ancho sutil */
+            height: 36px;
+            width: 240px;
         }
 
         /* --- RESPONSIVE MEDIA QUERIES --- */
         @media (max-width: 768px) {
-            .overlay-image {
-                max-width: 100%; 
+            .top-gallery {
+                grid-template-columns: repeat(2, 1fr);
+                height: 20vh;
             }
-            .audio-container {
+            .overlay-image {
+                max-width: 100%;
+            }
+            .audio-player-dock {
                 right: 50%;
-                transform: translateX(50%); /* Lo centra en pantallas móviles */
+                transform: translateX(50%);
                 bottom: 15px;
                 width: calc(100% - 40px);
-                max-width: 300px;
+                max-width: 280px;
             }
-            .audio-container audio {
+            .audio-player-dock audio {
                 width: 100%;
             }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-    <main class="hero-video-section">
-        
-        <video class="bg-video" autoplay muted loop playsinline>
-            <source src="PLAYA.mp4" type="video/mp4">
-        </video>
+    <div class="audio-player-dock">
+        <audio controls autoplay loop>
+            <source src="Taylor Swift - Daylight (Official Audio).mp3" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+    </div>
 
-        <img src="Copia de Ingrid.PNG" alt="Branding Azul Café" class="overlay-image">
+    <div class="main-slider">
 
-        <div class="audio-container">
-            <audio controls autoplay loop>
-                <source src="Taylor Swift - Daylight (Official Audio).mp3" type="audio/mpeg">
-                Tu navegador no soporta el elemento de audio.
-            </audio>
-        </div>
+        <section class="slide-section home-interface">
+            <header class="top-gallery">
+                <div class="gallery-item item-1"></div>
+                <div class="gallery-item item-2"></div>
+                <div class="gallery-item item-3"></div>
+                <div class="gallery-item item-4"></div>
+            </header>
 
-    </main>
+            <div class="hero-video-container">
+                <video class="bg-video" autoplay muted loop playsinline>
+                    <source src="PLAYA.mp4" type="video/mp4">
+                </video>
+                <img src="Copia de Ingrid.PNG" alt="Branding Azul Café" class="overlay-image">
+            </div>
+        </section>
+
+        <section class="slide-section quote-interface">
+            <div class="quote-wrapper">
+                <h2 class="main-quote">Ella se venga por el monólogo</h2>
+                <p class="quote-author">- Gustave Flaubert</p>
+            </div>
+        </section>
+
+    </div>
 
 </body>
 </html>
