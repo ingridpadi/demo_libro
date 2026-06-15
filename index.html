@@ -7,7 +7,8 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
         /* --- RESET & BASE --- */
@@ -19,9 +20,9 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #0b2230; /* Azul oscuro profundo de base */
+            background-color: #051622;
             color: #ffffff;
-            overflow: hidden;
+            overflow: hidden; /* Controlado por el slider */
         }
 
         /* --- CONTENEDOR DESLIZABLE (SCROLL SNAP) --- */
@@ -29,27 +30,29 @@
             width: 100%;
             height: 100vh;
             overflow-y: auto;
-            scroll-snap-type: y mandatory; /* Fuerza el deslizamiento por secciones completas */
+            scroll-snap-type: y proximity; /* Proximidad para manejar el slide pequeño de 1/4 */
             scroll-behavior: smooth;
         }
 
         .slide-section {
             width: 100%;
             height: 100vh;
-            scroll-snap-align: start; /* Alinea cada sección al inicio de la pantalla */
+            scroll-snap-align: start;
             position: relative;
-            overflow: hidden;
-        }
-
-        /* --- DIAPOSITIVA 1: PRINCIPAL (VIDEO + LOGO EXTRA GRANDE) --- */
-        .hero-video-container {
-            width: 100%;
-            height: 100vh;
             overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+
+        /* --- SLIDE 1: HERO (VIDEO + LOGO) --- */
+        .hero-video-container {
+            width: 100%;
+            height: 100%;
             position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .bg-video {
@@ -62,49 +65,89 @@
             z-index: 1;
         }
 
-        /* Imagen de marca superpuesta (Tamaño maximizado) */
         .overlay-image {
             position: relative;
             z-index: 2;
             width: 100%;
             max-width: 135%;
-            max-height: 100vh;
+            max-height: 100%;
             object-fit: contain;
             pointer-events: none;
         }
 
-        /* --- DIAPOSITIVA 2: MAQUETACIÓN DE CITA (FONDO MAR) --- */
-        .quote-interface {
-            background-image: linear-gradient(rgba(11, 34, 48, 0.2), rgba(11, 34, 48, 0.4)), url('https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1800&q=80'); /* Cambiar por tu fondo si lo requieres */
+        /* --- SLIDE 2: CITA FLAUBERT (1/4 de tamaño) --- */
+        .quote-section-small {
+            width: 100%;
+            height: 25vh; /* Ajustado a 1/4 del slide */
+            min-height: 180px;
+            background-image: linear-gradient(rgba(11, 34, 48, 0.6), rgba(11, 34, 48, 0.8)), url('https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1000&q=80');
             background-size: cover;
             background-position: center;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 40px;
+            scroll-snap-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        .quote-wrapper {
-            text-align: center;
-            max-width: 900px;
-            animation: fadeIn 1.5s ease-out;
-        }
-
-        .main-quote {
-            font-size: clamp(2rem, 5vw, 4rem); /* Texto fluido y grande */
+        .main-quote-small {
+            font-size: clamp(1.2rem, 3vw, 2.2rem);
             font-weight: 700;
-            line-height: 1.3;
-            margin-bottom: 25px;
-            letter-spacing: -0.5px;
-            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+            margin-bottom: 8px;
+            text-align: center;
         }
 
-        .quote-author {
-            font-size: clamp(1rem, 2vw, 1.5rem);
+        .quote-author-small {
+            font-size: 1rem;
             font-weight: 300;
-            letter-spacing: 2px;
-            opacity: 0.9;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+            opacity: 0.8;
+        }
+
+        /* --- SLIDE 3: ¿QUIÉN SOY? --- */
+        .who-am-i-section {
+            background-image: linear-gradient(rgba(5, 22, 34, 0.4), rgba(5, 22, 34, 0.2)), url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1800&q=80');
+            background-size: cover;
+            background-position: center;
+            flex-direction: column;
+        }
+
+        .who-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            margin-bottom: 40px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        /* Representación visual del Sobre con Corazón */
+        .envelope-card {
+            background-color: #ffffff;
+            width: 320px;
+            height: 220px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Triángulo superior del sobre */
+        .envelope-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            border-left: 160px solid transparent;
+            border-right: 160px solid transparent;
+            border-top: 100px solid rgba(0,0,0,0.05);
+        }
+
+        .heart-icon {
+            color: #0b2230; /* Azul oscuro como el mar */
+            font-size: 80px;
+            z-index: 5;
         }
 
         /* --- MINI REPRODUCTOR FIJO --- */
@@ -112,47 +155,31 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            z-index: 100; /* Siempre visible sobre todas las secciones */
+            z-index: 100;
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             padding: 6px;
             border-radius: 30px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            transition: opacity 0.3s ease;
             opacity: 0.8;
+            transition: opacity 0.3s;
         }
 
-        .audio-player-dock:hover {
-            opacity: 1;
+        .audio-player-dock:hover { opacity: 1; }
+        .audio-player-dock audio { display: block; height: 36px; width: 240px; }
+
+        /* --- ANIMACIONES --- */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
 
-        .audio-player-dock audio {
-            display: block;
-            height: 36px;
-            width: 240px;
-        }
-
-        /* --- RESPONSIVE MEDIA QUERIES --- */
         @media (max-width: 768px) {
-            .overlay-image {
-                max-width: 100%;
-            }
-            .audio-player-dock {
-                right: 50%;
-                transform: translateX(50%);
-                bottom: 15px;
-                width: calc(100% - 40px);
-                max-width: 280px;
-            }
-            .audio-player-dock audio {
-                width: 100%;
-            }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            .overlay-image { max-width: 100%; }
+            .envelope-card { width: 260px; height: 180px; }
+            .envelope-card::after { border-left-width: 130px; border-right-width: 130px; }
+            .heart-icon { font-size: 60px; }
+            .audio-player-dock { right: 50%; transform: translateX(50%); width: 280px; }
         }
     </style>
 </head>
@@ -161,7 +188,7 @@
     <div class="audio-player-dock">
         <audio controls autoplay loop>
             <source src="Taylor Swift - Daylight (Official Audio).mp3" type="audio/mpeg">
-            Tu navegador no soporta el elemento de audio.
+            Tu navegador no soporta el audio.
         </audio>
     </div>
 
@@ -172,14 +199,20 @@
                 <video class="bg-video" autoplay muted loop playsinline>
                     <source src="PLAYA.mp4" type="video/mp4">
                 </video>
-                <img src="Copia de Ingrid.PNG" alt="Branding Azul Café" class="overlay-image">
+                <img src="Copia de Ingrid.PNG" alt="azul Café" class="overlay-image">
             </div>
         </section>
 
-        <section class="slide-section quote-interface">
-            <div class="quote-wrapper">
-                <h2 class="main-quote">Ella se venga por el monólogo</h2>
-                <p class="quote-author">- Gustave Flaubert</p>
+        <div class="quote-section-small">
+            <h2 class="main-quote-small">Ella se venga por el monólogo</h2>
+            <p class="quote-author-small">- Gustave Flaubert</p>
+        </div>
+
+        <section class="slide-section who-am-i-section">
+            <h2 class="who-title">¿Quién soy?</h2>
+            
+            <div class="envelope-card">
+                <i class="fa-solid fa-heart heart-icon"></i>
             </div>
         </section>
 
