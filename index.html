@@ -242,7 +242,7 @@
         .sand-icon-item .steam-lines { font-size: 12px; margin-bottom: -2px; opacity: 0.7; }
 
 
-        /* --- SLIDE 3: ¿QUIÉN SOY? + CARTA INTERACTIVA --- */
+        /* --- SLIDE 3: CONOCE MÁS DE LA AUTORA + CARTA INTERACTIVA --- */
         .who-am-i-section {
             background-image: linear-gradient(rgba(5, 22, 34, 0.5), rgba(5, 22, 34, 0.3)), url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1800&q=80');
             background-size: cover;
@@ -252,11 +252,12 @@
         }
 
         .who-title {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-size: clamp(2rem, 5vw, 4rem);
             font-weight: 800;
             margin-bottom: 30px;
             text-shadow: 0 4px 20px rgba(0,0,0,0.4);
             transition: opacity 0.4s, transform 0.4s;
+            text-align: center;
         }
 
         .interactive-envelope-wrapper {
@@ -402,15 +403,14 @@
             background-size: 16px 16px;
             overflow: hidden;
             display: flex;
-            flex-direction: column; /* Apila el carrusel y el footer verticalmente */
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             position: relative;
             padding: 20px 0;
-            gap: 35px; /* Espaciado estético entre el carrusel y las redes */
+            gap: 35px;
         }
 
-        /* Pista del carrusel para el movimiento */
         .polaroid-carousel-track {
             display: flex;
             flex-wrap: nowrap;
@@ -418,13 +418,11 @@
             position: relative;
         }
 
-        /* Animación de desplazamiento continuo para el bucle */
         @keyframes scrollPolaroids {
             from { transform: translateX(0); }
             to { transform: translateX(-1980px); } 
         }
 
-        /* Estilo Base de cada Marco Polaroid adaptado al carrusel */
         .polaroid-card {
             background: #ffffff;
             padding: 12px 12px 28px 12px;
@@ -450,7 +448,6 @@
             background-color: #f0f0f0;
         }
 
-        /* Efecto de Cinta Adhesiva (Tape) */
         .polaroid-card::before {
             content: '';
             position: absolute;
@@ -465,7 +462,6 @@
             pointer-events: none;
         }
 
-        /* Variaciones de Inclinación */
         .p-card-1 { transform: rotate(-3deg); }
         .p-card-2 { transform: rotate(1deg); }
         .p-card-3 { transform: rotate(-1.5deg); }
@@ -474,7 +470,6 @@
         .p-card-5 { transform: rotate(-1deg); }
         .p-card-6 { transform: rotate(3deg); }
 
-        /* --- NUEVO ESTILO: FOOTER DE REDES Y DEDICATORIA --- */
         .gallery-footer {
             text-align: center;
             z-index: 30;
@@ -604,9 +599,9 @@
             </div>
         </section>
 
-        <!-- SLIDE 3: ¿Quién soy? Interactivo -->
+        <!-- SLIDE 3: Conoce más de la autora Interactivo -->
         <section class="slide-section who-am-i-section" id="whoSection">
-            <h2 class="who-title">¿Quién soy?</h2>
+            <h2 class="who-title">Conoce más de la autora</h2>
             
             <div class="interactive-envelope-wrapper">
                 <div class="envelope-button" onclick="toggleLetter()">
