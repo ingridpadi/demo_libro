@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>azul Café - Landing Page</title>
     
-    <!-- Google Fonts: Montserrat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome para los íconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
@@ -77,17 +75,22 @@
             pointer-events: none;
         }
 
-        /* --- SLIDE 2: IMAGEN DE LA CITA (AJUSTADA A TODA LA PANTALLA) --- */
+        /* --- SLIDE 2: ILUSTRACIÓN DE LA CITA (AJUSTE INTEGRAL E IMPECABLE) --- */
         .quote-image-section {
             width: 100%;
             height: 100vh;
+            background-color: #f9f1e7; /* Fondo exacto a juego con la ilustración */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .quote-img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Corregido: Ahora cubre toda la pantalla de borde a borde igual que los otros slides */
-            object-position: center;
+            max-width: 100%;
+            max-height: 100vh;
+            object-fit: contain; /* Garantiza que toda la obra de arte se vea completa sin recortar nada */
         }
 
         /* --- SLIDE 3: ¿QUIÉN SOY? + INTERACTIVIDAD DE CARTA --- */
@@ -270,7 +273,6 @@
 </head>
 <body>
 
-    <!-- Mini Reproductor de Música -->
     <div class="audio-player-dock">
         <audio controls autoplay loop>
             <source src="Taylor Swift - Daylight (Official Audio).mp3" type="audio/mpeg">
@@ -278,10 +280,8 @@
         </audio>
     </div>
 
-    <!-- Contenedor Deslizable Principal -->
     <div class="main-slider">
 
-        <!-- SLIDE 1: Portada Video + Logo -->
         <section class="slide-section">
             <div class="hero-video-container">
                 <video class="bg-video" autoplay muted loop playsinline>
@@ -291,22 +291,18 @@
             </div>
         </section>
 
-        <!-- SLIDE 2: Imagen de la cita (Pantalla Completa de Borde a Borde) -->
         <section class="slide-section quote-image-section">
             <img src="cita.jpeg" alt="Ella se venga por el monólogo - Gustave Flaubert" class="quote-img">
         </section>
 
-        <!-- SLIDE 3: ¿Quién soy? Interactivo -->
         <section class="slide-section who-am-i-section" id="whoSection">
             <h2 class="who-title">¿Quién soy?</h2>
             
             <div class="interactive-envelope-wrapper">
-                <!-- Botón de apertura (El Sobre) -->
                 <div class="envelope-button" onclick="toggleLetter()">
                     <i class="fa-solid fa-heart heart-icon"></i>
                 </div>
 
-                <!-- Despliegue de la Carta Estilizada -->
                 <div class="letter-card">
                     <div class="letter-header">
                         <div class="letter-chevron close-letter-btn" onclick="toggleLetter()">
@@ -330,7 +326,6 @@
 
     </div>
 
-    <!-- Script para activar y desactivar la animación de la carta -->
     <script>
         function toggleLetter() {
             const whoSection = document.getElementById('whoSection');
