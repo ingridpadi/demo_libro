@@ -77,7 +77,7 @@
             pointer-events: none;
         }
 
-        /* --- SLIDE 2: ILUSTRACIÓN DE LA CITA + INTERACTIVIDAD EN EL CAFÉ --- */
+        /* --- SLIDE 2: ILUSTRACIÓN DE LA CITA + INTERACTIVIDAD ORIGINAL --- */
         .quote-image-section {
             width: 100%;
             height: 100vh;
@@ -241,6 +241,7 @@
         .sand-icon-item .fa-mug-hot { font-size: 28px; }
         .sand-icon-item .steam-lines { font-size: 12px; margin-bottom: -2px; opacity: 0.7; }
 
+
         /* --- SLIDE 3: ¿QUIÉN SOY? + CARTA INTERACTIVA --- */
         .who-am-i-section {
             background-image: linear-gradient(rgba(5, 22, 34, 0.5), rgba(5, 22, 34, 0.3)), url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1800&q=80');
@@ -394,30 +395,33 @@
         }
 
 
-        /* --- SLIDE 5: GALERÍA POLAROID REUBICADA ABAJO DEL LIBRO --- */
-        .polaroid-gallery-section {
+        /* --- SLIDE 5: BANNER DE CARRUSEL AUTOMÁTICO, ALEATORIO Y EN BUCLE --- */
+        .polaroid-carousel-viewport {
             background-color: #e9eff4;
             background-image: radial-gradient(rgba(0,0,0,0.02) 1px, transparent 0);
             background-size: 16px 16px;
+            overflow: hidden;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 40px 6% 40px 4%;
-            gap: 40px;
+            position: relative;
+            padding: 40px 0;
         }
 
-        /* Contenedor Grid Izquierdo para las 6 Fotos */
-        .polaroids-grid-container {
-            flex: 1.4;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-gap: 20px 25px;
-            align-items: center;
-            justify-content: center;
-            max-width: 850px;
+        /* Pista del carrusel para el movimiento */
+        .polaroid-carousel-track {
+            display: flex;
+            flex-wrap: nowrap;
+            width: calc(330px * 12); /* Anchura de 12 fotos barajadas con sus márgenes */
+            position: relative;
         }
 
-        /* Estilo Base de cada Marco Polaroid */
+        /* Animación de desplazamiento continuo para el bucle */
+        @keyframes scrollPolaroids {
+            from { transform: translateX(0); }
+            to { transform: translateX(-1980px); } /* Anchura exacta del set de 6 fotos */
+        }
+
+        /* Estilo Base de cada Marco Polaroid adaptado al carrusel */
         .polaroid-card {
             background: #ffffff;
             padding: 12px 12px 28px 12px;
@@ -425,6 +429,9 @@
             position: relative;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
+            flex: 0 0 auto;
+            width: 300px;
+            margin: 0 15px;
         }
         .polaroid-card:hover {
             transform: scale(1.04) rotate(0deg) !important;
@@ -464,43 +471,6 @@
         .p-card-5 { transform: rotate(-1deg); }
         .p-card-6 { transform: rotate(3deg); }
 
-        /* Panel Derecha de Conceptos Clave */
-        .gallery-concepts-panel {
-            flex: 0.8;
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-            padding-left: 20px;
-            border-left: 2px dashed rgba(28, 60, 90, 0.1);
-        }
-
-        .concept-row-item {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            color: #1c3c5a;
-            transition: transform 0.2s ease;
-        }
-        .concept-row-item:hover {
-            transform: translateX(8px);
-        }
-
-        .concept-icon-box {
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 26px;
-            color: #1a436d;
-        }
-
-        .concept-label-text {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.2rem, 1.8vw, 1.6rem);
-            font-weight: 600;
-        }
-
 
         /* --- MINI REPRODUCTOR FIJO --- */
         .audio-player-dock {
@@ -520,12 +490,6 @@
         .audio-player-dock audio { display: block; height: 36px; width: 240px; }
 
         /* --- RESPONSIVE MEDIA QUERIES --- */
-        @media (max-width: 968px) {
-            .polaroid-gallery-section { flex-direction: column; padding: 30px 20px; justify-content: center; overflow-y: auto; }
-            .polaroids-grid-container { max-width: 100%; width: 100%; grid-template-columns: repeat(2, 1fr); }
-            .gallery-concepts-panel { flex: none; width: 100%; border-left: none; border-top: 2px dashed rgba(28, 60, 90, 0.1); padding-top: 25px; padding-left: 0; display: grid; grid-template-columns: repeat(2, 1fr); }
-        }
-
         @media (max-width: 768px) {
             .overlay-image { max-width: 100%; }
             .cafe-trigger-btn { top: 71%; width: 38px; height: 38px; font-size: 15px; }
@@ -538,7 +502,6 @@
             .envelope-button { width: 260px; height: 180px; }
             .envelope-button::after { border-left-width: 130px; border-right-width: 130px; }
             .heart-icon { font-size: 60px; }
-            .gallery-concepts-panel { grid-template-columns: 1fr; }
             .book-display-container { padding: 15px; }
             .audio-player-dock { right: 50%; transform: translateX(50%); width: 280px; }
         }
@@ -567,7 +530,7 @@
             </div>
         </section>
 
-        <!-- SLIDE 2: Ilustración de la Cita + Botón e Interfaz de Arena -->
+        <!-- SLIDE 2: Ilustración de la Cita + Botón e Interfaz de Arena RESTAURADOS -->
         <section class="slide-section quote-image-section">
             <div class="quote-img-container">
                 <img src="cita.jpeg" alt="Ella se venga por el monólogo - Gustave Flaubert" class="quote-img">
@@ -650,72 +613,28 @@
             </div>
         </section>
 
-        <!-- SLIDE 4: MUESTRA DEL LIBRO - BANNER DE MAR (1/4) + IMAGEN "azul cafe.jpeg" (3/4) -->
+        <!-- SLIDE 4: MUESTRA DEL LIBRO -->
         <section class="slide-section book-showcase-section">
-            <!-- Banner Superior con Fondo de Mar Real -->
             <div class="book-top-banner-sea">
                 <h2 class="banner-text">Conoce más de mí en mi libro</h2>
             </div>
             
-            <!-- Contenedor con Imagen del Libro Real -->
             <div class="book-display-container">
                 <img src="azul cafe.jpeg" alt="Páginas del libro azul Café" class="book-pages-img">
             </div>
         </section>
 
-        <!-- SLIDE 5: GALERÍA DE FOTOS POLAROID (Ubicada ahora abajo del libro con rutas 1-6.jpeg) -->
-        <section class="slide-section polaroid-gallery-section">
+        <!-- SLIDE 5: BANNER DE CARRUSEL AUTOMÁTICO, ALEATORIO Y EN BUCLE (FOTOS 1-6.jpeg) -->
+        <section class="slide-section polaroid-carousel-viewport">
             
-            <!-- Bloque de Fotos Mosaico -->
-            <div class="polaroids-grid-container">
-                <!-- Foto 1 -->
-                <div class="polaroid-card p-card-1">
-                    <img src="1.jpeg" alt="Vista uno de la galería">
-                </div>
-                <!-- Foto 2 -->
-                <div class="polaroid-card p-card-2">
-                    <img src="2.jpeg" alt="Vista dos de la galería">
-                </div>
-                <!-- Foto 3 -->
-                <div class="polaroid-card p-card-3">
-                    <img src="3.jpeg" alt="Vista tres de la galería">
-                </div>
-                <!-- Foto 4 -->
-                <div class="polaroid-card p-card-4">
-                    <img src="4.jpeg" alt="Vista cuatro de la galería">
-                </div>
-                <!-- Foto 5 -->
-                <div class="polaroid-card p-card-5">
-                    <img src="5.jpeg" alt="Vista cinco de la galería">
-                </div>
-                <!-- Foto 6 -->
-                <div class="polaroid-card p-card-6">
-                    <img src="6.jpeg" alt="Vista seis de la galería">
-                </div>
-            </div>
-
-            <!-- Panel de Conceptos de la Derecha -->
-            <div class="gallery-concepts-panel">
-                <div class="concept-row-item">
-                    <div class="concept-icon-box"><i class="fa-solid fa-water"></i></div>
-                    <span class="concept-label-text">Mar</span>
-                </div>
-                <div class="concept-row-item">
-                    <div class="concept-icon-box"><i class="fa-solid fa-mug-hot"></i></div>
-                    <span class="concept-label-text">Café</span>
-                </div>
-                <div class="concept-row-item">
-                    <div class="concept-icon-box"><i class="fa-solid fa-house-chimney-window"></i></div>
-                    <span class="concept-label-text">Hogar</span>
-                </div>
-                <div class="concept-row-item">
-                    <div class="concept-icon-box"><i class="fa-regular fa-heart"></i></div>
-                    <span class="concept-label-text">Memorias</span>
-                </div>
-                <div class="concept-row-item">
-                    <div class="concept-icon-box"><i class="fa-regular fa-star"></i></div>
-                    <span class="concept-label-text">Versiones de mí</span>
-                </div>
+            <div class="polaroid-carousel-track" id="polaroidCarouselTrack">
+                <!-- Se inyectan dinámicamente de forma aleatoria por JS -->
+                <div class="polaroid-card p-card-1"><img src="1.jpeg" alt="Muestra 1"></div>
+                <div class="polaroid-card p-card-2"><img src="2.jpeg" alt="Muestra 2"></div>
+                <div class="polaroid-card p-card-3"><img src="3.jpeg" alt="Muestra 3"></div>
+                <div class="polaroid-card p-card-4"><img src="4.jpeg" alt="Muestra 4"></div>
+                <div class="polaroid-card p-card-5"><img src="5.jpeg" alt="Muestra 5"></div>
+                <div class="polaroid-card p-card-6"><img src="6.jpeg" alt="Muestra 6"></div>
             </div>
 
         </section>
@@ -736,6 +655,34 @@
             const whoSection = document.getElementById('whoSection');
             whoSection.classList.toggle('active-letter');
         }
+
+        /* --- SCRIPT PARA EL CARRUSEL POLAROID (ALEATORIO Y EN BUCLE INFINITO) --- */
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function initPolaroidCarousel() {
+            const track = document.getElementById('polaroidCarouselTrack');
+            const originalPolaroids = Array.from(track.querySelectorAll('.polaroid-card'));
+            
+            // Barajar el set original
+            shuffleArray(originalPolaroids);
+            
+            // Clonar para asegurar la ilusión de bucle continuo sin saltos
+            const clonedPolaroids = originalPolaroids.map(card => card.cloneNode(true));
+            
+            track.innerHTML = ''; 
+            originalPolaroids.forEach(card => track.appendChild(card));
+            clonedPolaroids.forEach(card => track.appendChild(card));
+            
+            // Iniciar animación uniforme
+            track.style.animation = 'scrollPolaroids 35s linear infinite';
+        }
+
+        window.addEventListener('load', initPolaroidCarousel); 
     </script>
 
 </body>
