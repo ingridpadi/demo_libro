@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>azul Café - Landing Page</title>
     
+    <!-- Google Fonts: Montserrat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome para los íconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
@@ -75,34 +77,25 @@
             pointer-events: none;
         }
 
-        /* --- SLIDE 2: CITA FLAUBERT (1/4 DE PANTALLA) --- */
-        .quote-section-small {
+        /* --- SECCIÓN FRAGMENTADA: IMAGEN DE LA CITA (1/4 DE PANTALLA) --- */
+        .quote-image-section {
             width: 100%;
-            height: 25vh;
+            height: 25vh; /* Mantiene el tamaño de un cuarto de página */
             min-height: 180px;
-            background-image: linear-gradient(rgba(11, 34, 48, 0.6), rgba(11, 34, 48, 0.8)), url('https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1000&q=80');
-            background-size: cover;
-            background-position: center;
+            background-color: #0b2230;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             scroll-snap-align: center;
             border-top: 1px solid rgba(255,255,255,0.1);
             border-bottom: 1px solid rgba(255,255,255,0.1);
+            overflow: hidden;
         }
 
-        .main-quote-small {
-            font-size: clamp(1.2rem, 3vw, 2.2rem);
-            font-weight: 700;
-            margin-bottom: 8px;
-            text-align: center;
-        }
-
-        .quote-author-small {
-            font-size: 1rem;
-            font-weight: 300;
-            opacity: 0.8;
+        .quote-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Se adapta al contenedor cubriendo el espacio de forma elegante */
         }
 
         /* --- SLIDE 3: ¿QUIÉN SOY? + INTERACTIVIDAD DE CARTA --- */
@@ -172,10 +165,10 @@
             transform: scale(1.1);
         }
 
-        /* CARTA DESPLEGADA (Oculta por defecto) */
+        /* CARTA DESPLEGADA */
         .letter-card {
             background-color: #ffffff;
-            color: #003452; /* Tono azul oscuro idéntico para la tipografía */
+            color: #003452;
             width: 100%;
             padding: 40px 50px;
             border-radius: 4px;
@@ -188,7 +181,6 @@
             z-index: 5;
         }
 
-        /* Decoraciones superiores de tu maquetación */
         .letter-header {
             display: flex;
             justify-content: space-between;
@@ -215,7 +207,6 @@
             border-radius: 50%;
         }
 
-        /* Cuerpo de texto de la carta */
         .letter-body {
             text-align: center;
             font-size: clamp(0.9rem, 1.6vw, 1.15rem);
@@ -232,7 +223,7 @@
             margin-bottom: 0;
         }
 
-        /* --- ESTADOS ACTIVOS (AL TOCAR EL CORAZÓN) --- */
+        /* --- ESTADOS ACTIVOS --- */
         .active-letter .envelope-button {
             transform: scale(0.5) translateY(-200px);
             opacity: 0;
@@ -252,7 +243,6 @@
             z-index: 20;
         }
 
-        /* Botón flotante para cerrar la carta si se desea */
         .close-letter-btn {
             cursor: pointer;
         }
@@ -288,6 +278,7 @@
 </head>
 <body>
 
+    <!-- Mini Reproductor de Música -->
     <div class="audio-player-dock">
         <audio controls autoplay loop>
             <source src="Taylor Swift - Daylight (Official Audio).mp3" type="audio/mpeg">
@@ -295,8 +286,10 @@
         </audio>
     </div>
 
+    <!-- Contenedor Deslizable Principal -->
     <div class="main-slider">
 
+        <!-- SLIDE 1: Portada Video + Logo -->
         <section class="slide-section">
             <div class="hero-video-container">
                 <video class="bg-video" autoplay muted loop playsinline>
@@ -306,19 +299,22 @@
             </div>
         </section>
 
-        <div class="quote-section-small">
-            <h2 class="main-quote-small">Ella se venga por el monólogo</h2>
-            <p class="quote-author-small">- Gustave Flaubert</p>
+        <!-- SECCIÓN 2: Imagen de la cita (1/4 de Pantalla) -->
+        <div class="quote-image-section">
+            <img src="cita.jpeg" alt="Ella se venga por el monólogo - Gustave Flaubert" class="quote-img">
         </div>
 
+        <!-- SLIDE 3: ¿Quién soy? Interactivo -->
         <section class="slide-section who-am-i-section" id="whoSection">
             <h2 class="who-title">¿Quién soy?</h2>
             
             <div class="interactive-envelope-wrapper">
+                <!-- Botón de apertura (El Sobre) -->
                 <div class="envelope-button" onclick="toggleLetter()">
                     <i class="fa-solid fa-heart heart-icon"></i>
                 </div>
 
+                <!-- Despliegue de la Carta Estilizada -->
                 <div class="letter-card">
                     <div class="letter-header">
                         <div class="letter-chevron close-letter-btn" onclick="toggleLetter()">
@@ -342,6 +338,7 @@
 
     </div>
 
+    <!-- Script para activar y desactivar la animación de la carta -->
     <script>
         function toggleLetter() {
             const whoSection = document.getElementById('whoSection');
