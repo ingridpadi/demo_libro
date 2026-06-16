@@ -165,4 +165,166 @@
             opacity: 0;
             transform: scale(0.8) translateY(50px);
             pointer-events: none;
-            transition: all 0.5s cubic-bezier(0.19,
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: 5;
+        }
+
+        .letter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+        .letter-chevron {
+            color: #003452;
+            font-size: 24px;
+            font-weight: 900;
+        }
+
+        .letter-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background-color: #003452;
+            border-radius: 50%;
+        }
+
+        .letter-body {
+            text-align: center;
+            font-size: clamp(0.9rem, 1.6vw, 1.15rem);
+            line-height: 1.7;
+            font-weight: 600;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .letter-body p {
+            margin-bottom: 15px;
+        }
+        .letter-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* --- ESTADOS ACTIVOS --- */
+        .active-letter .envelope-button {
+            transform: scale(0.5) translateY(-200px);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .active-letter .who-title {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        .active-letter .letter-card {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            pointer-events: auto;
+            position: relative;
+            z-index: 20;
+        }
+
+        .close-letter-btn {
+            cursor: pointer;
+        }
+
+        /* --- MINI REPRODUCTOR FIJO --- */
+        .audio-player-dock {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            padding: 6px;
+            border-radius: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .audio-player-dock:hover { opacity: 1; }
+        .audio-player-dock audio { display: block; height: 36px; width: 240px; }
+
+        /* --- RESPONSIVE MEDIA QUERIES --- */
+        @media (max-width: 768px) {
+            .overlay-image { max-width: 100%; }
+            .letter-card { padding: 30px 20px; }
+            .envelope-button { width: 260px; height: 180px; }
+            .envelope-button::after { border-left-width: 130px; border-right-width: 130px; }
+            .heart-icon { font-size: 60px; }
+            .audio-player-dock { right: 50%; transform: translateX(50%); width: 280px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="audio-player-dock">
+        <audio controls autoplay loop>
+            <source src="Taylor Swift - Daylight (Official Audio).mp3" type="audio/mpeg">
+            Tu navegador no soporta el audio.
+        </audio>
+    </div>
+
+    <div class="main-slider">
+
+        <section class="slide-section">
+            <div class="hero-video-container">
+                <video class="bg-video" autoplay muted loop playsinline>
+                    <source src="PLAYA.mp4" type="video/mp4">
+                </video>
+                <img src="Copia de Ingrid.PNG" alt="azul Café" class="overlay-image">
+            </div>
+        </section>
+
+        <section class="slide-section quote-image-section">
+            <img src="cita.jpeg" alt="Ella se venga por el monólogo - Gustave Flaubert" class="quote-img">
+        </section>
+
+        <section class="slide-section who-am-i-section" id="whoSection">
+            <h2 class="who-title">¿Quién soy?</h2>
+            
+            <div class="interactive-envelope-wrapper">
+                <div class="envelope-button" onclick="toggleLetter()">
+                    <i class="fa-solid fa-heart heart-icon"></i>
+                </div>
+
+                <div class="letter-card">
+                    <div class="letter-header">
+                        <div class="letter-chevron close-letter-btn" onclick="toggleLetter()">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </div>
+                        <div class="letter-dots">
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="letter-body">
+                        <p>Soy hija, hermana, sobrina, nieta, estudiante, amiga... muchas versiones de mí misma.</p>
+                        <p>Hay partes de mí que me han hecho quien soy hoy: algunas bonitas, otras difíciles, pero todas necesarias. Entendí que soy una Ingrid diferente para cada situación, y está bien así. Estoy orgullosa de cada una de ellas, de lo que fui y de lo que soy.</p>
+                        <p>Me amo, en serio. Amo cada versión de mí.</p>
+                        <p>También creo que las personas que me rodean me van formando poquito a poco, dejando algo en mí: energía, emociones, aprendizajes. Y sí, es difícil decir quién soy, porque todavía me estoy definiendo... y quizá eso me tome toda la vida.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        function toggleLetter() {
+            const whoSection = document.getElementById('whoSection');
+            whoSection.classList.toggle('active-letter');
+        }
+    </script>
+
+</body>
+</html>
