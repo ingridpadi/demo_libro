@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>azul Café - Bienvenida</title>
+    <title>azul Café - Landing Page</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
+    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Montserrat', sans-serif; background-color: #051622; color: #ffffff; overflow: hidden; }
@@ -15,68 +14,73 @@
         .main-slider { width: 100%; height: 100vh; overflow-y: auto; scroll-snap-type: y mandatory; scroll-behavior: smooth; }
         .slide-section { width: 100%; height: 100vh; scroll-snap-align: start; position: relative; display: flex; justify-content: center; align-items: center; }
 
-        /* --- SLIDE 1: LOGO INTERACTIVO --- */
-        .hero-video-container { width: 100%; height: 100%; position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        .bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
-
-        /* El logo convertido en botón */
+        /* Estilo del Logo como botón */
         .logo-btn {
             position: relative;
-            z-index: 2;
+            z-index: 10;
             width: 80%;
             max-width: 600px;
             cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
         }
 
         .logo-btn:hover {
-            transform: scale(1.05);
-            filter: drop-shadow(0 15px 30px rgba(255,255,255,0.2));
+            transform: scale(1.08);
         }
 
-        /* Indicador sutil de "Presiona aquí" */
         .hint-text {
             position: absolute;
-            bottom: 50px;
-            z-index: 3;
-            letter-spacing: 4px;
+            bottom: 40px;
+            letter-spacing: 5px;
             text-transform: uppercase;
             font-size: 10px;
-            opacity: 0.6;
-            animation: pulse 2s infinite;
+            opacity: 0.5;
+            pointer-events: none;
+            animation: fadeInOut 2s infinite;
         }
 
-        @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.9; } }
+        @keyframes fadeInOut { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.8; } }
 
-        /* ... (resto de tus estilos de slides 2-5 se mantienen igual) ... */
+        .bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
     </style>
 </head>
 <body>
 
     <div class="main-slider" id="mainSlider">
-        <section class="slide-section">
-            <div class="hero-video-container">
-                <video class="bg-video" autoplay muted loop playsinline>
-                    <source src="PLAYA.mp4" type="video/mp4">
-                </video>
-                
-                <img src="Copia de Ingrid.PNG" alt="azul Café" class="logo-btn" onclick="scrollToNext()">
-                
-                <div class="hint-text">Toca el logo para comenzar</div>
-            </div>
+        
+        <section class="slide-section" id="slide1">
+            <video class="bg-video" autoplay muted loop playsinline>
+                <source src="PLAYA.mp4" type="video/mp4">
+            </video>
+            
+            <img src="Copia de Ingrid.PNG" alt="azul Café" class="logo-btn" onclick="goNext()">
+            
+            <div class="hint-text">Presiona el logo para explorar</div>
         </section>
 
-        <section class="slide-section" id="slide2">
-            </section>
-    </div>
+        <section class="slide-section" id="slide2" style="background: #f9f1e7; color: #051622;">
+            <h2>Bienvenida al Slide 2</h2>
+        </section>
+        
+        </div>
 
     <script>
-        function scrollToNext() {
-            // Se desplaza al siguiente elemento slide-section
-            document.querySelector('#slide2').scrollIntoView({ 
-                behavior: 'smooth' 
-            });
+        function goNext() {
+            const slider = document.getElementById('mainSlider');
+            const slides = document.querySelectorAll('.slide-section');
+            const currentScroll = slider.scrollTop;
+            const slideHeight = window.innerHeight;
+            
+            // Calcula cuál es el slide actual y salta al siguiente
+            const nextIndex = Math.round(currentScroll / slideHeight) + 1;
+            
+            if (nextIndex < slides.length) {
+                slides[nextIndex].scrollIntoView({ behavior: 'smooth' });
+            } else {
+                // Si llegas al final, vuelve al inicio
+                slider.scrollTo({ top: 0, behavior: 'smooth' });
+            }
         }
     </script>
 </body>
