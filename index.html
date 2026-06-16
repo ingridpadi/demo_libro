@@ -395,30 +395,33 @@
         }
 
 
-        /* --- SLIDE 5: BANNER DE CARRUSEL AUTOMÁTICO, ALEATORIO Y EN BUCLE --- */
+        /* --- SLIDE 5: BANNER DE CARRUSEL + FOOTER SOCIAL --- */
         .polaroid-carousel-viewport {
             background-color: #e9eff4;
             background-image: radial-gradient(rgba(0,0,0,0.02) 1px, transparent 0);
             background-size: 16px 16px;
             overflow: hidden;
             display: flex;
+            flex-direction: column; /* Apila el carrusel y el footer verticalmente */
+            justify-content: center;
             align-items: center;
             position: relative;
-            padding: 40px 0;
+            padding: 20px 0;
+            gap: 35px; /* Espaciado estético entre el carrusel y las redes */
         }
 
         /* Pista del carrusel para el movimiento */
         .polaroid-carousel-track {
             display: flex;
             flex-wrap: nowrap;
-            width: calc(330px * 12); /* Anchura de 12 fotos barajadas con sus márgenes */
+            width: calc(330px * 12); 
             position: relative;
         }
 
         /* Animación de desplazamiento continuo para el bucle */
         @keyframes scrollPolaroids {
             from { transform: translateX(0); }
-            to { transform: translateX(-1980px); } /* Anchura exacta del set de 6 fotos */
+            to { transform: translateX(-1980px); } 
         }
 
         /* Estilo Base de cada Marco Polaroid adaptado al carrusel */
@@ -471,6 +474,35 @@
         .p-card-5 { transform: rotate(-1deg); }
         .p-card-6 { transform: rotate(3deg); }
 
+        /* --- NUEVO ESTILO: FOOTER DE REDES Y DEDICATORIA --- */
+        .gallery-footer {
+            text-align: center;
+            z-index: 30;
+        }
+
+        .instagram-link {
+            color: #0c3156;
+            font-size: 36px;
+            text-decoration: none;
+            transition: transform 0.3s ease, color 0.3s ease;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .instagram-link:hover {
+            transform: scale(1.18);
+            color: #1a4d80;
+        }
+
+        .dedication-text {
+            font-family: 'Playfair Display', serif;
+            color: #0c3156;
+            font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+            font-weight: 600;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
 
         /* --- MINI REPRODUCTOR FIJO --- */
         .audio-player-dock {
@@ -504,6 +536,8 @@
             .heart-icon { font-size: 60px; }
             .book-display-container { padding: 15px; }
             .audio-player-dock { right: 50%; transform: translateX(50%); width: 280px; }
+            .polaroid-carousel-viewport { gap: 20px; }
+            .instagram-link { font-size: 32px; }
         }
     </style>
 </head>
@@ -530,7 +564,7 @@
             </div>
         </section>
 
-        <!-- SLIDE 2: Ilustración de la Cita + Botón e Interfaz de Arena RESTAURADOS -->
+        <!-- SLIDE 2: Ilustración de la Cita + Botón e Interfaz de Arena -->
         <section class="slide-section quote-image-section">
             <div class="quote-img-container">
                 <img src="cita.jpeg" alt="Ella se venga por el monólogo - Gustave Flaubert" class="quote-img">
@@ -624,17 +658,24 @@
             </div>
         </section>
 
-        <!-- SLIDE 5: BANNER DE CARRUSEL AUTOMÁTICO, ALEATORIO Y EN BUCLE (FOTOS 1-6.jpeg) -->
+        <!-- SLIDE 5: BANNER EN BUCLE + SECCIÓN INSTAGRAM Y DEDICATORIA -->
         <section class="slide-section polaroid-carousel-viewport">
             
             <div class="polaroid-carousel-track" id="polaroidCarouselTrack">
-                <!-- Se inyectan dinámicamente de forma aleatoria por JS -->
                 <div class="polaroid-card p-card-1"><img src="1.jpeg" alt="Muestra 1"></div>
                 <div class="polaroid-card p-card-2"><img src="2.jpeg" alt="Muestra 2"></div>
                 <div class="polaroid-card p-card-3"><img src="3.jpeg" alt="Muestra 3"></div>
                 <div class="polaroid-card p-card-4"><img src="4.jpeg" alt="Muestra 4"></div>
                 <div class="polaroid-card p-card-5"><img src="5.jpeg" alt="Muestra 5"></div>
                 <div class="polaroid-card p-card-6"><img src="6.jpeg" alt="Muestra 6"></div>
+            </div>
+
+            <!-- Redes Sociales y Firma -->
+            <div class="gallery-footer">
+                <a href="https://www.instagram.com/itsmili.in?igsh=MW1ya2h5NHMxdGtxNg%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="instagram-link" title="Sígueme en Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <p class="dedication-text">- Ingrid Padilla</p>
             </div>
 
         </section>
@@ -668,17 +709,14 @@
             const track = document.getElementById('polaroidCarouselTrack');
             const originalPolaroids = Array.from(track.querySelectorAll('.polaroid-card'));
             
-            // Barajar el set original
             shuffleArray(originalPolaroids);
             
-            // Clonar para asegurar la ilusión de bucle continuo sin saltos
             const clonedPolaroids = originalPolaroids.map(card => card.cloneNode(true));
             
             track.innerHTML = ''; 
             originalPolaroids.forEach(card => track.appendChild(card));
             clonedPolaroids.forEach(card => track.appendChild(card));
             
-            // Iniciar animación uniforme
             track.style.animation = 'scrollPolaroids 35s linear infinite';
         }
 
