@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>azul Café - Landing Page</title>
     
-    <!-- Google Fonts: Montserrat, Playfair Display e Importación de Caveat para la caligrafía superior -->
+    <!-- Google Fonts: Montserrat, Playfair Display e Importación de Caveat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Montserrat:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -105,10 +105,9 @@
             object-fit: contain;
         }
 
-        /* Botón interactivo ubicado estratégicamente sobre la taza de café central */
         .cafe-trigger-btn {
             position: absolute;
-            top: 72%; /* Ubicación sobre la taza de café */
+            top: 72%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 45px;
@@ -127,7 +126,6 @@
             transition: all 0.3s ease;
         }
 
-        /* Efecto pulsante para llamar la atención en la taza */
         .cafe-trigger-btn::after {
             content: '';
             position: absolute;
@@ -151,7 +149,6 @@
             100% { transform: scale(1.8); opacity: 0; }
         }
 
-        /* NUEVA ETIQUETA / TARJETA CON FONDO SUAVE DE ARENA */
         .sand-label-card {
             position: absolute;
             top: 50%;
@@ -159,10 +156,10 @@
             transform: translate(-50%, -50%) scale(0.8);
             width: 90%;
             max-width: 680px;
-            background-color: #eedecb; /* Color suave de arena de la imagen */
-            background-image: radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 0); /* Simulación sutil de textura porosa */
+            background-color: #eedecb;
+            background-image: radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 0);
             background-size: 8px 8px;
-            color: #163a5f; /* Azul de la tipografía */
+            color: #163a5f;
             padding: 40px;
             border-radius: 4px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.3);
@@ -180,7 +177,6 @@
             transform: translate(-50%, -50%) scale(1);
         }
 
-        /* Botón cerrar para la etiqueta de arena */
         .close-sand-btn {
             position: absolute;
             top: 15px;
@@ -193,7 +189,6 @@
         }
         .close-sand-btn:hover { opacity: 1; }
 
-        /* Estilos del contenido calcados de WhatsApp Image 2026-06-15 at 10.24.31 PM.jpeg */
         .sand-title-cursive {
             font-family: 'Caveat', cursive;
             font-size: clamp(1.8rem, 3vw, 2.4rem);
@@ -217,9 +212,7 @@
             height: 1px;
             background-color: #163a5f;
         }
-        .sand-divider i {
-            font-size: 14px;
-        }
+        .sand-divider i { font-size: 14px; }
 
         .sand-body-text {
             font-size: clamp(1rem, 1.5vw, 1.25rem);
@@ -235,7 +228,6 @@
             margin-bottom: 30px;
         }
 
-        /* Fila de iconos marinos inferiores */
         .sand-icons-row {
             display: flex;
             justify-content: center;
@@ -244,16 +236,54 @@
             color: #163a5f;
             opacity: 0.9;
         }
-        .sand-icon-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+        .sand-icon-item { display: flex; flex-direction: column; align-items: center; }
         .sand-icon-item i { font-size: 32px; }
         .sand-icon-item .fa-mug-hot { font-size: 28px; }
         .sand-icon-item .steam-lines { font-size: 12px; margin-bottom: -2px; opacity: 0.7; }
 
-        /* --- SLIDE 3: ¿QUIÉN SOY? + CARTA INTERACTIVA --- */
+        /* --- NUEVO SLIDE: BANNER (1/4) + LIBRO ABIERTO (3/4) --- */
+        .book-showcase-section {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100vh;
+        }
+
+        /* Banner superior de 1/4 de pantalla */
+        .book-top-banner {
+            width: 100%;
+            height: 25vh; /* 1/4 exacto de la pantalla */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-top-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Garantiza que cubra todo el fondo como un banner sin deformarse */
+            object-position: center;
+        }
+
+        /* Contenedor del libro de 3/4 de pantalla */
+        .book-display-container {
+            width: 100%;
+            height: 75vh; /* 3/4 restantes */
+            background-color: #fdf7f2; /* Tono beige/crema impecable para fundirse con las páginas */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .book-pages-img {
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* Muestra el libro abierto completo sin recortes */
+        }
+
+        /* --- SLIDE 4: ¿QUIÉN SOY? + CARTA INTERACTIVA --- */
         .who-am-i-section {
             background-image: linear-gradient(rgba(5, 22, 34, 0.5), rgba(5, 22, 34, 0.3)), url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1800&q=80');
             background-size: cover;
@@ -377,6 +407,8 @@
             .cafe-trigger-btn { top: 71%; width: 38px; height: 38px; font-size: 15px; }
             .sand-label-card { padding: 25px 15px; width: 95%; }
             .sand-icons-row { gap: 30px; }
+            .book-top-banner { height: 20vh; }
+            .book-display-container { height: 80vh; padding: 10px; }
             .letter-card { padding: 30px 20px; }
             .letter-content-layout { flex-direction: column; gap: 20px; }
             .letter-art-side { display: none; }
@@ -452,7 +484,19 @@
             </div>
         </section>
 
-        <!-- SLIDE 3: ¿Quién soy? Interactivo -->
+        <!-- NUEVO SLIDE 3: Banner "Conoce más de mí" (1/4) + Muestra de Libro Abierto (3/4) -->
+        <section class="slide-section book-showcase-section">
+            <!-- Banner Superior (1/4 Pantalla) -->
+            <div class="book-top-banner">
+                <img src="WhatsApp Image 2026-06-15 at 10.30.39 PM.jpeg" alt="Conoce más de mí en mi libro">
+            </div>
+            <!-- Contenedor del Libro Abierto (3/4 Pantalla) -->
+            <div class="book-display-container">
+                <img src="WhatsApp Image 2026-06-15 at 10.31.43 PM.jpeg" alt="Páginas del libro azul Café" class="book-pages-img">
+            </div>
+        </section>
+
+        <!-- SLIDE 4: ¿Quién soy? Interactivo -->
         <section class="slide-section who-am-i-section" id="whoSection">
             <h2 class="who-title">¿Quién soy?</h2>
             
