@@ -343,7 +343,58 @@
         .active-letter .letter-card { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; position: relative; z-index: 20; }
 
 
-        /* --- NUEVO SLIDE 4: GALERÍA POLAROID (Fiel a WhatsApp Image 2026-06-15 at 10.58.03 PM.jpeg) --- */
+        /* --- SLIDE 4: MUESTRA DEL LIBRO (CON BANNER DE MAR DE 1/4) --- */
+        .book-showcase-section {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100vh;
+            background-color: #fdf7f2;
+        }
+
+        .book-top-banner-sea {
+            width: 100%;
+            height: 25vh;
+            background-image: linear-gradient(rgba(2, 23, 42, 0.75), rgba(5, 33, 58, 0.85)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .banner-text {
+            color: #ffffff;
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .book-display-container {
+            width: 100%;
+            height: 75vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .book-pages-img {
+            width: 100%;
+            height: 100%;
+            max-width: 1100px;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
+        }
+
+
+        /* --- SLIDE 5: GALERÍA POLAROID REUBICADA ABAJO DEL LIBRO --- */
         .polaroid-gallery-section {
             background-color: #e9eff4;
             background-image: radial-gradient(rgba(0,0,0,0.02) 1px, transparent 0);
@@ -404,12 +455,12 @@
             pointer-events: none;
         }
 
-        /* Variaciones de Inclinación Específicas de la Imagen */
+        /* Variaciones de Inclinación */
         .p-card-1 { transform: rotate(-3deg); }
         .p-card-2 { transform: rotate(1deg); }
         .p-card-3 { transform: rotate(-1.5deg); }
         .p-card-4 { transform: rotate(2deg); }
-        .p-card-4::before { transform: translateX(-60%) rotate(-15deg); top: auto; bottom: -5px; left: 15px; } /* Tape abajo como el ave */
+        .p-card-4::before { transform: translateX(-60%) rotate(-15deg); top: auto; bottom: -5px; left: 15px; } 
         .p-card-5 { transform: rotate(-1deg); }
         .p-card-6 { transform: rotate(3deg); }
 
@@ -450,56 +501,6 @@
             font-weight: 600;
         }
 
-
-        /* --- SLIDE 5: BANNER DE MAR (1/4) + IMAGEN DEL LIBRO EN RUTA ALTERNATIVA (3/4) --- */
-        .book-showcase-section {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            height: 100vh;
-            background-color: #fdf7f2;
-        }
-
-        .book-top-banner-sea {
-            width: 100%;
-            height: 25vh;
-            background-image: linear-gradient(rgba(2, 23, 42, 0.75), rgba(5, 33, 58, 0.85)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .banner-text {
-            color: #ffffff;
-            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            text-shadow: 0 4px 12px rgba(0,0,0,0.5);
-            text-align: center;
-            padding: 0 20px;
-        }
-
-        .book-display-container {
-            width: 100%;
-            height: 75vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
-        }
-
-        .book-pages-img {
-            width: 100%;
-            height: 100%;
-            max-width: 1100px;
-            max-height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
-        }
 
         /* --- MINI REPRODUCTOR FIJO --- */
         .audio-player-dock {
@@ -649,34 +650,47 @@
             </div>
         </section>
 
-        <!-- NUEVO SLIDE 4: GALERÍA DE FOTOS POLAROID (Fiel al mosaico de WhatsApp Image 2026-06-15 at 10.58.03 PM.jpeg) -->
+        <!-- SLIDE 4: MUESTRA DEL LIBRO - BANNER DE MAR (1/4) + IMAGEN "azul cafe.jpeg" (3/4) -->
+        <section class="slide-section book-showcase-section">
+            <!-- Banner Superior con Fondo de Mar Real -->
+            <div class="book-top-banner-sea">
+                <h2 class="banner-text">Conoce más de mí en mi libro</h2>
+            </div>
+            
+            <!-- Contenedor con Imagen del Libro Real -->
+            <div class="book-display-container">
+                <img src="azul cafe.jpeg" alt="Páginas del libro azul Café" class="book-pages-img">
+            </div>
+        </section>
+
+        <!-- SLIDE 5: GALERÍA DE FOTOS POLAROID (Ubicada ahora abajo del libro con rutas 1-6.jpeg) -->
         <section class="slide-section polaroid-gallery-section">
             
-            <!-- Bloque de Fotos Físicas Replicadas -->
+            <!-- Bloque de Fotos Mosaico -->
             <div class="polaroids-grid-container">
-                <!-- Foto 1: Mar de Fondo -->
+                <!-- Foto 1 -->
                 <div class="polaroid-card p-card-1">
-                    <img src="mar-polaroid.jpeg" alt="Oleaje de mar azul">
+                    <img src="1.jpeg" alt="Vista uno de la galería">
                 </div>
-                <!-- Foto 2: Taza de Café de arriba -->
+                <!-- Foto 2 -->
                 <div class="polaroid-card p-card-2">
-                    <img src="taza-polaroid.jpeg" alt="Taza de café concentrado">
+                    <img src="2.jpeg" alt="Vista dos de la galería">
                 </div>
-                <!-- Foto 3: Ilustración Niña en Taza -->
+                <!-- Foto 3 -->
                 <div class="polaroid-card p-card-3">
-                    <img src="ilustracion-polaroid.jpeg" alt="Dibujo minimalista azul café">
+                    <img src="3.jpeg" alt="Vista tres de la galería">
                 </div>
-                <!-- Foto 4: Gaviota Volando -->
+                <!-- Foto 4 -->
                 <div class="polaroid-card p-card-4">
-                    <img src="gaviota-polaroid.jpeg" alt="Gaviota en vuelo libre">
+                    <img src="4.jpeg" alt="Vista cuatro de la galería">
                 </div>
-                <!-- Foto 5: Corazón Blanco en Fondo Azul -->
+                <!-- Foto 5 -->
                 <div class="polaroid-card p-card-5">
-                    <img src="corazon-polaroid.jpeg" alt="Corazón central minimalista">
+                    <img src="5.jpeg" alt="Vista cinco de la galería">
                 </div>
-                <!-- Foto 6: Conchas en la Arena -->
+                <!-- Foto 6 -->
                 <div class="polaroid-card p-card-6">
-                    <img src="conchas-polaroid.jpeg" alt="Caracoles y conchas de mar en la arena">
+                    <img src="6.jpeg" alt="Vista seis de la galería">
                 </div>
             </div>
 
@@ -704,19 +718,6 @@
                 </div>
             </div>
 
-        </section>
-
-        <!-- SLIDE 5: UBICADO AL FINAL - BANNER DE MAR (1/4) + IMAGEN DEL LIBRO EN RUTA ALTERNATIVA (3/4) -->
-        <section class="slide-section book-showcase-section">
-            <!-- Banner Superior con Fondo de Mar Real (1/4 Pantalla) -->
-            <div class="book-top-banner-sea">
-                <h2 class="banner-text">Conoce más de mí en mi libro</h2>
-            </div>
-            
-            <!-- Contenedor con Imagen del Libro Real (3/4 Pantalla) -->
-            <div class="book-display-container">
-                <img src="azul cafe.jpeg" alt="Páginas del libro azul Café" class="book-pages-img">
-            </div>
         </section>
 
     </div>
