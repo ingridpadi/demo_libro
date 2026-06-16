@@ -342,586 +342,124 @@
         .active-letter .who-title { opacity: 0; transform: translateY(-20px); }
         .active-letter .letter-card { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; position: relative; z-index: 20; }
 
-        /* --- SLIDE 4: ESTRUCTURA INTERNA MEJORADA ABAJO DE LA CARTA --- */
-        .book-showcase-section {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            height: 100vh;
-            background-color: #fdf7f2; /* Fondo crema para continuidad visual */
-        }
 
-        /* Banner de 1/4 con fondo de mar real y superposición azul */
-        .book-top-banner-sea {
-            width: 100%;
-            height: 25vh;
-            background-image: linear-gradient(rgba(2, 23, 42, 0.75), rgba(5, 33, 58, 0.85)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80');
-            background-size: cover;
-            background-position: center;
+        /* --- NUEVO SLIDE 4: GALERÍA POLAROID (Fiel a WhatsApp Image 2026-06-15 at 10.58.03 PM.jpeg) --- */
+        .polaroid-gallery-section {
+            background-color: #e9eff4;
+            background-image: radial-gradient(rgba(0,0,0,0.02) 1px, transparent 0);
+            background-size: 16px 16px;
             display: flex;
-            justify-content: center;
             align-items: center;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            justify-content: space-between;
+            padding: 40px 6% 40px 4%;
+            gap: 40px;
         }
 
-        .banner-text {
-            color: #ffffff;
-            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            text-shadow: 0 4px 12px rgba(0,0,0,0.5);
-            text-align: center;
-            padding: 0 20px;
-        }
-
-        /* Contenedor de la Imagen del Libro Abierto (3/4 de Pantalla) */
-        .book-display-container {
-            width: 100%;
-            height: 75vh;
-            display: flex;
-            justify-content: center;
+        /* Contenedor Grid Izquierdo para las 6 Fotos */
+        .polaroids-grid-container {
+            flex: 1.4;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 20px 25px;
             align-items: center;
-            padding: 40px;
+            justify-content: center;
+            max-width: 850px;
         }
 
-        /* Render de la imagen real en ruta alternativa */
-        .book-pages-img {
-            width: 100%;
-            height: 100%;
-            max-width: 1100px;
-            max-height: 100%;
-            object-fit: contain; /* Evita recortes molestos o deformaciones */
-            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15)); /* Agrega sombra suave realista en la mesa */
-        }
-
-        /* --- MINI REPRODUCTOR FIJO --- */
-        .audio-player-dock {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(12px);
-            padding: 6px;
-            border-radius: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            opacity: 0.8;
-            transition: opacity 0.3s;
-        }
-        .audio-player-dock:hover { opacity: 1; }
-        .audio-player-dock audio { display: block; height: 36px; width: 240px; }
-
-        /* --- RESPONSIVE MEDIA QUERIES --- */
-        @media (max-width: 768px) {
-            .overlay-image { max-width: 100%; }
-            .cafe-trigger-btn { top: 71%; width: 38px; height: 38px; font-size: 15px; }
-            .sand-label-card { padding: 25px 15px; width: 95%; }
-            .sand-icons-row { gap: 30px; }
-            .letter-card { padding: 30px 20px; }
-            .letter-content-layout { flex-direction: column; gap: 20px; }
-            .letter-art-side { display: none; }
-            .letter-body-side { flex: none; width: 100%; text-align: center; }
-            .envelope-button { width: 260px; height: 180px; }
-            .envelope-button::after { border-left-width: 130px; border-right-width: 130px; }
-            .heart-icon { font-size: 60px; }
-            .book-display-container { padding: 15px; }
-            .audio-player-dock { right: 50%; transform: translateX(50%); width: 280px; }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Mini Reproductor de Música -->
-    <div class="audio-player-dock">
-        <audio controls autoplay loop>
-            <source src="Taylor Swift - Daylight (Official Audio).mp3" type="audio/mpeg">
-            Tu navegador no soporta el audio.
-        </audio>
-    </div>
-
-    <!-- Contenedor Deslizable Principal -->
-    <div class="main-slider">
-
-        <!-- SLIDE 1: Portada Video + Logo -->
-        <section class="slide-section">
-            <div class="hero-video-container">
-                <video class="bg-video" autoplay muted loop playsinline>
-                    <source src="PLAYA.mp4" type="video/mp4">
-                </video>
-                <img src="Copia de Ingrid.PNG" alt="azul Café" class="overlay-image">
-            </div>
-        </section>
-
-        <!-- SLIDE 2: Ilustración de la Cita + Botón e Interfaz de Arena -->
-        <section class="slide-section quote-image-section">
-            <div class="quote-img-container">
-                <img src="cita.jpeg" alt="Ella se venga por el monólogo - Gustave Flaubert" class="quote-img">
-                
-                <!-- Botón Interactivo sobre la taza -->
-                <button class="cafe-trigger-btn" onclick="openSandCard()" title="Descubrir más">
-                    <i class="fa-solid fa-mug-hot"></i>
-                </button>
-            </div>
-
-            <!-- Etiqueta Flotante (Fondo Arena) -->
-            <div class="sand-label-card" id="sandCard">
-                <div class="close-sand-btn" onclick="closeSandCard()">
-                    <i class="fa-solid fa-xmark"></i>
-                </div>
-                <h3 class="sand-title-cursive">Un viaje entre el mar, el café y las distintas versiones de mí misma.</h3>
-                
-                <div class="sand-divider">
-                    <i class="fa-regular fa-heart"></i>
-                </div>
-
-                <p class="sand-body-text">Azul Café es un proyecto editorial que reúne textos, ilustraciones y memorias inspiradas en el amor, la nostalgia, el crecimiento personal y la búsqueda de hogar.</p>
-                <p class="sand-footer-text">Cada página es una conversación conmigo misma.</p>
-
-                <div class="sand-icons-row">
-                    <div class="sand-icon-item">
-                        <i class="fa-solid fa-book-open"></i>
-                    </div>
-                    <div class="sand-icon-item">
-                        <span class="steam-lines">‹‹‹</span>
-                        <i class="fa-solid fa-mug-hot"></i>
-                    </div>
-                    <div class="sand-icon-item">
-                        <i class="fa-solid fa-water"></i>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SLIDE 3: ¿Quién soy? Interactivo -->
-        <section class="slide-section who-am-i-section" id="whoSection">
-            <h2 class="who-title">¿Quién soy?</h2>
-            
-            <div class="interactive-envelope-wrapper">
-                <div class="envelope-button" onclick="toggleLetter()">
-                    <i class="fa-solid fa-heart heart-icon"></i>
-                </div>
-
-                <div class="letter-card">
-                    <div class="letter-header">
-                        <div class="letter-chevron" onclick="toggleLetter()">
-                            <i class="fa-solid fa-chevron-left"></i>
-                        </div>
-                        <div class="letter-dots">
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-                        </div>
-                    </div>
-                    
-                    <div class="letter-content-layout">
-                        <div class="letter-art-side">
-                            <div style="font-size: 24px; color: #1a436d; margin-bottom: 20px; display: flex; gap: 30px; opacity: 0.5;">
-                                <i class="fa-solid fa-dove" style="transform: scaleX(-1) rotate(-15deg);"></i>
-                                <i class="fa-solid fa-dove" style="transform: translateY(-10px) scaleX(-1) rotate(-10deg); font-size: 18px;"></i>
-                            </div>
-                            <i class="fa-solid fa-crow art-bird"></i>
-                            <div class="art-waves-small">~~~</div>
-                        </div>
-
-                        <div class="letter-body-side">
-                            <p>Soy hija, hermana, sobrina, nieta, estudiante, amiga...<br>muchas versiones de mí misma.</p>
-                            <p>Hay partes de mí que me han hecho quien soy hoy: algunas bonitas, otras difíciles, pero todas necesarias. Entendí que soy una Ingrid diferente para cada situación, y está bien así. Estoy orgullosa de cada una de ellas, de lo que fui y de lo que soy.</p>
-                            <p><strong>Me amo, en serio. Amo cada versión de mí.</strong></p>
-                            <p>También creo que las personas que me rodean me van formando poquito a poco, dejando algo en mí: energía, emociones, aprendizajes.<br>Y sí, es bonito.</p>
-                        </div>
-                    </div>
-                    <div class="bottom-decor-waves">~~</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SLIDE 4: UBICADO ABAJO DE LA CARTA - BANNER DE MAR (1/4) + IMAGEN DEL LIBRO EN RUTA ALTERNATIVA (3/4) -->
-        <section class="slide-section book-showcase-section">
-            <!-- Banner Superior con Fondo de Mar Real (1/4 Pantalla) -->
-            <div class="book-top-banner-sea">
-                <h2 class="banner-text">Conoce más de mí en mi libro</h2>
-            </div>
-            
-            <!-- Contenedor con Imagen del Libro Real (3/4 Pantalla) -->
-            <div class="book-display-container">
-                <img src="azul cafe.jpeg" alt="Páginas del libro azul Café" class="book-pages-img">
-            </div>
-        </section>
-
-    </div>
-
-    <!-- Scripts de Control -->
-    <script>
-        function openSandCard() {
-            document.getElementById('sandCard').classList.add('active');
-        }
-
-        function closeSandCard() {
-            document.getElementById('sandCard').classList.remove('active');
-        }
-
-        function toggleLetter() {
-            const whoSection = document.getElementById('whoSection');
-            whoSection.classList.toggle('active-letter');
-        }
-    </script>
-
-</body>
-</html><!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>azul Café - Landing Page</title>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Montserrat:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    <!-- Font Awesome para los íconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <style>
-        /* --- RESET & BASE --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #051622;
-            color: #ffffff;
-            overflow: hidden;
-        }
-
-        /* --- CONTENEDOR DESLIZABLE (SCROLL SNAP) --- */
-        .main-slider {
-            width: 100%;
-            height: 100vh;
-            overflow-y: auto;
-            scroll-snap-type: y mandatory;
-            scroll-behavior: smooth;
-        }
-
-        .slide-section {
-            width: 100%;
-            height: 100vh;
-            scroll-snap-align: start;
+        /* Estilo Base de cada Marco Polaroid */
+        .polaroid-card {
+            background: #ffffff;
+            padding: 12px 12px 28px 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
             position: relative;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .polaroid-card:hover {
+            transform: scale(1.04) rotate(0deg) !important;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            z-index: 20;
         }
 
-        /* --- SLIDE 1: HERO (VIDEO + LOGO) --- */
-        .hero-video-container {
+        .polaroid-card img {
             width: 100%;
-            height: 100%;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .bg-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            aspect-ratio: 1 / 1;
             object-fit: cover;
-            z-index: 1;
+            display: block;
+            background-color: #f0f0f0;
         }
 
-        .overlay-image {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            max-width: 135%;
-            max-height: 100%;
-            object-fit: contain;
+        /* Efecto de Cinta Adhesiva (Tape) */
+        .polaroid-card::before {
+            content: '';
+            position: absolute;
+            width: 75px;
+            height: 22px;
+            background-color: rgba(210, 200, 185, 0.4);
+            backdrop-filter: blur(1px);
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2deg);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
             pointer-events: none;
         }
 
-        /* --- SLIDE 2: ILUSTRACIÓN DE LA CITA + INTERACTIVIDAD EN EL CAFÉ --- */
-        .quote-image-section {
-            width: 100%;
-            height: 100vh;
-            background-color: #f9f1e7;
+        /* Variaciones de Inclinación Específicas de la Imagen */
+        .p-card-1 { transform: rotate(-3deg); }
+        .p-card-2 { transform: rotate(1deg); }
+        .p-card-3 { transform: rotate(-1.5deg); }
+        .p-card-4 { transform: rotate(2deg); }
+        .p-card-4::before { transform: translateX(-60%) rotate(-15deg); top: auto; bottom: -5px; left: 15px; } /* Tape abajo como el ave */
+        .p-card-5 { transform: rotate(-1deg); }
+        .p-card-6 { transform: rotate(3deg); }
+
+        /* Panel Derecha de Conceptos Clave */
+        .gallery-concepts-panel {
+            flex: 0.8;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        .quote-img-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            max-width: 100%;
-            max-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .quote-img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .cafe-trigger-btn {
-            position: absolute;
-            top: 72%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 45px;
-            height: 45px;
-            background-color: #0c3156;
-            color: #ffffff;
-            border-radius: 50%;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 18px;
-            z-index: 30;
-            box-shadow: 0 0 15px rgba(12, 49, 86, 0.6);
-            transition: all 0.3s ease;
-        }
-
-        .cafe-trigger-btn::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border: 2px solid #0c3156;
-            border-radius: 50%;
-            animation: pulse-ring 2s infinite;
-            top: 0;
-            left: 0;
-            box-sizing: border-box;
-        }
-
-        .cafe-trigger-btn:hover {
-            transform: translate(-50%, -50%) scale(1.15);
-            background-color: #14497c;
-        }
-
-        @keyframes pulse-ring {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(1.8); opacity: 0; }
-        }
-
-        .sand-label-card {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.8);
-            width: 90%;
-            max-width: 680px;
-            background-color: #eedecb;
-            background-image: radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 0);
-            background-size: 8px 8px;
-            color: #163a5f;
-            padding: 40px;
-            border-radius: 4px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-            opacity: 0;
-            pointer-events: none;
-            z-index: 40;
-            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-            text-align: center;
-            font-family: 'Playfair Display', serif;
-        }
-
-        .sand-label-card.active {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .close-sand-btn {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 20px;
-            color: #163a5f;
-            cursor: pointer;
-            opacity: 0.6;
-            transition: opacity 0.2s;
-        }
-        .close-sand-btn:hover { opacity: 1; }
-
-        .sand-title-cursive {
-            font-family: 'Caveat', cursive;
-            font-size: clamp(1.8rem, 3vw, 2.4rem);
-            font-weight: 500;
-            margin-bottom: 12px;
-            color: #1c446c;
-        }
-
-        .sand-divider {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin: 0 auto 25px auto;
-            width: 60%;
-            opacity: 0.7;
-        }
-        .sand-divider::before, .sand-divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background-color: #163a5f;
-        }
-        .sand-divider i { font-size: 14px; }
-
-        .sand-body-text {
-            font-size: clamp(1rem, 1.5vw, 1.25rem);
-            line-height: 1.6;
-            font-weight: 500;
-            max-width: 580px;
-            margin: 0 auto 20px auto;
-        }
-
-        .sand-footer-text {
-            font-size: clamp(1rem, 1.5vw, 1.25rem);
-            font-weight: 600;
-            margin-bottom: 30px;
-        }
-
-        .sand-icons-row {
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            gap: 60px;
-            color: #163a5f;
-            opacity: 0.9;
-        }
-        .sand-icon-item { display: flex; flex-direction: column; align-items: center; }
-        .sand-icon-item i { font-size: 32px; }
-        .sand-icon-item .fa-mug-hot { font-size: 28px; }
-        .sand-icon-item .steam-lines { font-size: 12px; margin-bottom: -2px; opacity: 0.7; }
-
-        /* --- SLIDE 3: ¿QUIÉN SOY? + CARTA INTERACTIVA --- */
-        .who-am-i-section {
-            background-image: linear-gradient(rgba(5, 22, 34, 0.5), rgba(5, 22, 34, 0.3)), url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1800&q=80');
-            background-size: cover;
-            background-position: center;
             flex-direction: column;
-            padding: 20px;
+            gap: 25px;
+            padding-left: 20px;
+            border-left: 2px dashed rgba(28, 60, 90, 0.1);
         }
 
-        .who-title {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 800;
-            margin-bottom: 30px;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.4);
-            transition: opacity 0.4s, transform 0.4s;
-        }
-
-        .interactive-envelope-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 900px;
+        .concept-row-item {
             display: flex;
-            justify-content: center;
             align-items: center;
+            gap: 20px;
+            color: #1c3c5a;
+            transition: transform 0.2s ease;
+        }
+        .concept-row-item:hover {
+            transform: translateX(8px);
         }
 
-        .envelope-button {
-            background-color: #ffffff;
-            width: 320px;
-            height: 220px;
-            border-radius: 4px;
+        .concept-icon-box {
+            width: 50px;
+            height: 50px;
             display: flex;
-            justify-content: center;
             align-items: center;
-            position: relative;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 10;
+            justify-content: center;
+            font-size: 26px;
+            color: #1a436d;
         }
 
-        .envelope-button::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            border-left: 160px solid transparent;
-            border-right: 160px solid transparent;
-            border-top: 100px solid rgba(0,0,0,0.06);
-        }
-
-        .envelope-button:hover { transform: scale(1.05) translateY(-5px); }
-        .heart-icon { color: #0b2230; font-size: 80px; z-index: 12; transition: transform 0.3s ease; }
-        .envelope-button:hover .heart-icon { transform: scale(1.1); }
-
-        .letter-card {
-            background-color: #e3e7eb;
-            color: #0c3156;
+        .concept-label-text {
             font-family: 'Playfair Display', serif;
-            width: 100%;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 30px 70px rgba(0,0,0,0.5);
-            position: absolute;
-            opacity: 0;
-            transform: scale(0.8) translateY(50px);
-            pointer-events: none;
-            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-            z-index: 5;
-            overflow: hidden;
+            font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+            font-weight: 600;
         }
 
-        .letter-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 35%;
-            height: 12px;
-            background-color: #091f36;
-        }
 
-        .letter-content-layout { display: flex; gap: 40px; align-items: center; margin-top: 20px; }
-        .letter-art-side { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0.75; user-select: none; }
-        .art-bird { font-size: 110px; color: #1a436d; margin-bottom: 10px; }
-        .art-waves-small { font-size: 24px; color: #1a436d; letter-spacing: 4px; }
-        .letter-body-side { flex: 2; text-align: left; font-size: clamp(0.95rem, 1.4vw, 1.2rem); line-height: 1.6; }
-        .letter-body-side p { margin-bottom: 22px; font-weight: 500; }
-        .letter-body-side p strong { font-weight: 700; }
-        .letter-body-side p:last-child { margin-bottom: 0; }
-        .letter-header { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 15px; position: relative; z-index: 10; }
-        .letter-chevron { color: #0c3156; font-size: 22px; cursor: pointer; transition: transform 0.2s; }
-        .letter-chevron:hover { transform: scale(1.15); }
-        .letter-dots { display: flex; gap: 6px; }
-        .dot { width: 8px; height: 8px; background-color: #0c3156; border-radius: 50%; opacity: 0.6; }
-        .bottom-decor-waves { position: absolute; bottom: 20px; right: 30px; color: #1a436d; font-size: 20px; opacity: 0.7; }
-
-        /* --- ESTADOS ACTIVOS DE LA CARTA --- */
-        .active-letter .envelope-button { transform: scale(0.5) translateY(-200px); opacity: 0; pointer-events: none; }
-        .active-letter .who-title { opacity: 0; transform: translateY(-20px); }
-        .active-letter .letter-card { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; position: relative; z-index: 20; }
-
-        /* --- SLIDE 4: ESTRUCTURA INTERNA MEJORADA ABAJO DE LA CARTA --- */
+        /* --- SLIDE 5: BANNER DE MAR (1/4) + IMAGEN DEL LIBRO EN RUTA ALTERNATIVA (3/4) --- */
         .book-showcase-section {
             display: flex;
             flex-direction: column;
             width: 100%;
             height: 100vh;
-            background-color: #fdf7f2; /* Fondo crema para continuidad visual */
+            background-color: #fdf7f2;
         }
 
-        /* Banner de 1/4 con fondo de mar real y superposición azul */
         .book-top-banner-sea {
             width: 100%;
             height: 25vh;
@@ -945,7 +483,6 @@
             padding: 0 20px;
         }
 
-        /* Contenedor de la Imagen del Libro Abierto (3/4 de Pantalla) */
         .book-display-container {
             width: 100%;
             height: 75vh;
@@ -955,14 +492,13 @@
             padding: 40px;
         }
 
-        /* Render de la imagen real en ruta alternativa */
         .book-pages-img {
             width: 100%;
             height: 100%;
             max-width: 1100px;
             max-height: 100%;
-            object-fit: contain; /* Evita recortes molestos o deformaciones */
-            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15)); /* Agrega sombra suave realista en la mesa */
+            object-fit: contain;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
         }
 
         /* --- MINI REPRODUCTOR FIJO --- */
@@ -983,6 +519,12 @@
         .audio-player-dock audio { display: block; height: 36px; width: 240px; }
 
         /* --- RESPONSIVE MEDIA QUERIES --- */
+        @media (max-width: 968px) {
+            .polaroid-gallery-section { flex-direction: column; padding: 30px 20px; justify-content: center; overflow-y: auto; }
+            .polaroids-grid-container { max-width: 100%; width: 100%; grid-template-columns: repeat(2, 1fr); }
+            .gallery-concepts-panel { flex: none; width: 100%; border-left: none; border-top: 2px dashed rgba(28, 60, 90, 0.1); padding-top: 25px; padding-left: 0; display: grid; grid-template-columns: repeat(2, 1fr); }
+        }
+
         @media (max-width: 768px) {
             .overlay-image { max-width: 100%; }
             .cafe-trigger-btn { top: 71%; width: 38px; height: 38px; font-size: 15px; }
@@ -995,6 +537,7 @@
             .envelope-button { width: 260px; height: 180px; }
             .envelope-button::after { border-left-width: 130px; border-right-width: 130px; }
             .heart-icon { font-size: 60px; }
+            .gallery-concepts-panel { grid-template-columns: 1fr; }
             .book-display-container { padding: 15px; }
             .audio-player-dock { right: 50%; transform: translateX(50%); width: 280px; }
         }
@@ -1106,7 +649,64 @@
             </div>
         </section>
 
-        <!-- SLIDE 4: UBICADO ABAJO DE LA CARTA - BANNER DE MAR (1/4) + IMAGEN DEL LIBRO EN RUTA ALTERNATIVA (3/4) -->
+        <!-- NUEVO SLIDE 4: GALERÍA DE FOTOS POLAROID (Fiel al mosaico de WhatsApp Image 2026-06-15 at 10.58.03 PM.jpeg) -->
+        <section class="slide-section polaroid-gallery-section">
+            
+            <!-- Bloque de Fotos Físicas Replicadas -->
+            <div class="polaroids-grid-container">
+                <!-- Foto 1: Mar de Fondo -->
+                <div class="polaroid-card p-card-1">
+                    <img src="mar-polaroid.jpeg" alt="Oleaje de mar azul">
+                </div>
+                <!-- Foto 2: Taza de Café de arriba -->
+                <div class="polaroid-card p-card-2">
+                    <img src="taza-polaroid.jpeg" alt="Taza de café concentrado">
+                </div>
+                <!-- Foto 3: Ilustración Niña en Taza -->
+                <div class="polaroid-card p-card-3">
+                    <img src="ilustracion-polaroid.jpeg" alt="Dibujo minimalista azul café">
+                </div>
+                <!-- Foto 4: Gaviota Volando -->
+                <div class="polaroid-card p-card-4">
+                    <img src="gaviota-polaroid.jpeg" alt="Gaviota en vuelo libre">
+                </div>
+                <!-- Foto 5: Corazón Blanco en Fondo Azul -->
+                <div class="polaroid-card p-card-5">
+                    <img src="corazon-polaroid.jpeg" alt="Corazón central minimalista">
+                </div>
+                <!-- Foto 6: Conchas en la Arena -->
+                <div class="polaroid-card p-card-6">
+                    <img src="conchas-polaroid.jpeg" alt="Caracoles y conchas de mar en la arena">
+                </div>
+            </div>
+
+            <!-- Panel de Conceptos de la Derecha -->
+            <div class="gallery-concepts-panel">
+                <div class="concept-row-item">
+                    <div class="concept-icon-box"><i class="fa-solid fa-water"></i></div>
+                    <span class="concept-label-text">Mar</span>
+                </div>
+                <div class="concept-row-item">
+                    <div class="concept-icon-box"><i class="fa-solid fa-mug-hot"></i></div>
+                    <span class="concept-label-text">Café</span>
+                </div>
+                <div class="concept-row-item">
+                    <div class="concept-icon-box"><i class="fa-solid fa-house-chimney-window"></i></div>
+                    <span class="concept-label-text">Hogar</span>
+                </div>
+                <div class="concept-row-item">
+                    <div class="concept-icon-box"><i class="fa-regular fa-heart"></i></div>
+                    <span class="concept-label-text">Memorias</span>
+                </div>
+                <div class="concept-row-item">
+                    <div class="concept-icon-box"><i class="fa-regular fa-star"></i></div>
+                    <span class="concept-label-text">Versiones de mí</span>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- SLIDE 5: UBICADO AL FINAL - BANNER DE MAR (1/4) + IMAGEN DEL LIBRO EN RUTA ALTERNATIVA (3/4) -->
         <section class="slide-section book-showcase-section">
             <!-- Banner Superior con Fondo de Mar Real (1/4 Pantalla) -->
             <div class="book-top-banner-sea">
