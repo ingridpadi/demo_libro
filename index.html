@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>azul Café - Landing Page</title>
+    <title>Azul Café - Portada Completa</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -41,109 +41,53 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'GandhiSans', sans-serif;
-            background-color: #051622;
-            color: #ffffff;
-            overflow: hidden;
+        body, html {
+            height: 100%;
+            overflow: hidden; /* Desactivamos el scroll para una experiencia de pantalla completa */
+            background-color: #051622; /* Color de fondo de seguridad mientras carga */
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- JERARQUÍA DE TIPOGRAFÍAS --- */
-        
-        /* 1. Títulos (Gandhi Sans Bold) */
-        h1, h2, .who-title, .banner-text, .quote-overlay-title {
-            font-family: 'GandhiSans', sans-serif;
-            font-weight: 700;
-        }
-        
-        /* Subtítulos Destacados Especiales (Gandhi Sans Bold) */
-        .sand-title-cursive {
-            font-family: 'GandhiSans', sans-serif;
-            font-weight: 700;
-            font-size: clamp(1.4rem, 2.5vw, 2rem);
-            color: #1c446c;
-            line-height: 1.4;
-        }
-
-        /* 2. Textos de Énfasis y Cierres (Gandhi Sans Italic) */
-        .dedication-text, em, .letter-card p:last-child {
-            font-family: 'GandhiSans', sans-serif;
-            font-style: italic;
-        }
-
-        /* 3. Estructuras de Interfaz / Destacados (Gandhi Sans Bold) */
-        .hint-text, strong, .letter-header, .close-sand-btn {
-            font-family: 'GandhiSans', sans-serif;
-            font-weight: 700;
-        }
-
-        /* 4. Cuerpo de lectura (Gandhi Sans Normal) */
-        p, .sand-body-text, .letter-body-side p {
-            font-family: 'GandhiSans', sans-serif;
-            font-weight: 400;
-            line-height: 1.6;
-        }
-
-
-        /* --- CONTENEDOR DESLIZABLE (SCROLL SNAP) --- */
-        .main-slider {
+        /* --- CONTENEDOR DE LA PORTADA A PANTALLA COMPLETA --- */
+        .cover-container {
             width: 100%;
-            height: 100vh;
-            overflow-y: auto;
-            scroll-snap-type: y mandatory;
-            scroll-behavior: smooth;
-        }
-
-        .slide-section {
-            width: 100%;
-            height: 100vh;
-            scroll-snap-align: start;
-            position: relative;
-            overflow: hidden;
+            height: 100vh; /* Altura de la vista del navegador completa */
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-
-        /* --- SLIDE 1: LOGO COMO NAVEGADOR --- */
-        .hero-video-container {
-            width: 100%;
-            height: 100%;
             position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
-        .bg-video {
+        /* La imagen de portada configurada como fondo */
+        .cover-image {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover; /* Ajusta la imagen para cubrir todo el contenedor sin deformarse */
             z-index: 1;
         }
 
-        .logo-btn {
+        /* --- ELEMENTOS DE INTERFAZ UNIFICADOS (Gandhi Sans) --- */
+        
+        /* Título de Portada (Gandhi Sans Bold) */
+        .cover-title {
             position: relative;
             z-index: 10;
-            width: 100%;
-            max-width: 800px;
-            max-height: 75vh;
-            object-fit: contain;
-            cursor: pointer;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s ease;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));
-            margin-bottom: 60px;
+            font-family: 'GandhiSans', sans-serif;
+            font-weight: 700;
+            color: #ffffff;
+            font-size: clamp(2rem, 6vw, 4rem); /* Tamaño fluido y grande */
+            text-align: center;
+            width: 90%;
+            max-width: 1000px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.6); /* Sombra para legibilidad */
+            pointer-events: none; /* El texto no interfiere con los clics */
+            margin-bottom: 20px;
         }
 
-        .logo-btn:hover {
-            transform: scale(1.05);
-            filter: drop-shadow(0 15px 25px rgba(255,255,255,0.15));
-        }
-
+        /* Hint Text (Gandhi Sans Bold + Mayúsculas) */
         .hint-text {
             position: absolute;
             bottom: 45px;
@@ -154,8 +98,10 @@
             text-transform: uppercase;
             font-size: 11px;
             color: rgba(255, 255, 255, 0.7);
+            font-family: 'GandhiSans', sans-serif;
+            font-weight: 700;
             pointer-events: none;
-            animation: bounceIndicator 2s infinite;
+            animation: bounceIndicator 2s infinite; /* Animación de rebote */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -168,368 +114,7 @@
             60% { transform: translate(-50%, -3px); }
         }
 
-
-        /* --- SLIDE 2: PORTADA + INTERFAZ ARENA (ACTUALIZADO) --- */
-        .quote-image-section {
-            width: 100%;
-            height: 100vh;
-            background-color: #f9f1e7;
-            position: relative;
-        }
-
-        .quote-img-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .quote-img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        /* Texto superpuesto sobre la portada */
-        .quote-overlay-title {
-            position: absolute;
-            top: 15%;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 15;
-            color: #0c3156;
-            font-size: clamp(1.8rem, 4.5vw, 3.2rem);
-            text-align: center;
-            width: 90%;
-            text-shadow: 0 2px 10px rgba(255,255,255,0.4);
-            pointer-events: none;
-        }
-
-        .cafe-trigger-btn {
-            position: absolute;
-            top: 72%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 46px;
-            height: 46px;
-            background-color: #0c3156;
-            color: #ffffff;
-            border-radius: 50%;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 18px;
-            z-index: 30;
-            box-shadow: 0 0 15px rgba(12, 49, 86, 0.6);
-            transition: all 0.3s ease;
-        }
-
-        .cafe-trigger-btn::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border: 2px solid #0c3156;
-            border-radius: 50%;
-            animation: pulse-ring 2s infinite;
-            top: 0;
-            left: 0;
-        }
-
-        .cafe-trigger-btn:hover {
-            transform: translate(-50%, -50%) scale(1.15);
-        }
-
-        @keyframes pulse-ring {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(1.8); opacity: 0; }
-        }
-
-        .sand-label-card {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.8);
-            width: 90%;
-            max-width: 680px;
-            background-color: #eedecb;
-            background-image: radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 0);
-            background-size: 8px 8px;
-            color: #163a5f;
-            padding: 40px;
-            border-radius: 4px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-            opacity: 0;
-            pointer-events: none;
-            z-index: 40;
-            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-            text-align: center;
-        }
-
-        .sand-label-card.active {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .close-sand-btn {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 20px;
-            cursor: pointer;
-            opacity: 0.6;
-        }
-
-        .sand-divider {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin: 0 auto 25px auto;
-            width: 60%;
-            opacity: 0.7;
-        }
-        .sand-divider::before, .sand-divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background-color: #163a5f;
-        }
-
-        .sand-body-text {
-            font-size: clamp(1rem, 1.4vw, 1.2rem);
-            margin-bottom: 20px;
-        }
-
-        .sand-icons-row {
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            gap: 60px;
-            opacity: 0.9;
-            margin-top: 25px;
-        }
-        .sand-icon-item { display: flex; flex-direction: column; align-items: center; }
-        .sand-icon-item i { font-size: 30px; }
-
-
-        /* --- SLIDE 3: AUTORA + INTERACTIVIDAD SOBRE --- */
-        .who-am-i-section {
-            background-image: linear-gradient(rgba(5, 22, 34, 0.55), rgba(5, 22, 34, 0.4)), url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1800&q=80');
-            background-size: cover;
-            background-position: center;
-            flex-direction: column;
-            padding: 20px;
-        }
-
-        .who-title {
-            font-size: clamp(2rem, 4.5vw, 3.5rem);
-            margin-bottom: 30px;
-            text-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            text-align: center;
-            transition: opacity 0.4s, transform 0.4s;
-        }
-
-        .interactive-envelope-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 900px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .envelope-button {
-            background-color: #ffffff;
-            width: 320px;
-            height: 220px;
-            border-radius: 4px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 10;
-        }
-
-        .envelope-button::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            border-left: 160px solid transparent;
-            border-right: 160px solid transparent;
-            border-top: 100px solid rgba(0,0,0,0.06);
-        }
-
-        .heart-icon { color: #0b2230; font-size: 75px; z-index: 12; }
-
-        .letter-card {
-            background-color: #e3e7eb;
-            color: #0c3156;
-            width: 100%;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 30px 70px rgba(0,0,0,0.5);
-            position: absolute;
-            opacity: 0;
-            transform: scale(0.8) translateY(50px);
-            pointer-events: none;
-            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-            z-index: 5;
-        }
-
-        .letter-content-layout { display: flex; gap: 40px; align-items: center; margin-top: 20px; }
-        .letter-art-side { flex: 1; display: flex; flex-direction: column; align-items: center; opacity: 0.7; }
-        .letter-body-side { flex: 2.2; text-align: left; font-size: clamp(0.95rem, 1.3vw, 1.15rem); }
-        .letter-body-side p { margin-bottom: 20px; }
-        
-        .letter-header { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-        .letter-chevron { font-size: 20px; cursor: pointer; }
-
-        .active-letter .envelope-button { opacity: 0; pointer-events: none; transform: scale(0.6); }
-        .active-letter .who-title { opacity: 0; transform: translateY(-15px); }
-        .active-letter .letter-card { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; position: relative; z-index: 20; }
-
-
-        /* --- SLIDE 4: GALERÍA DE PÁGINAS DEL LIBRO --- */
-        .book-showcase-section {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            height: 100vh;
-            background-color: #fdf7f2;
-        }
-
-        .book-top-banner-sea {
-            width: 100%;
-            height: 25vh;
-            background-image: linear-gradient(rgba(2, 23, 42, 0.75), rgba(5, 33, 58, 0.85)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .banner-text {
-            color: #ffffff;
-            font-size: clamp(1.8rem, 3.2vw, 2.6rem);
-            text-align: center;
-        }
-
-        .book-gallery-container {
-            width: 100%;
-            height: 75vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 40px;
-            padding: 35px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .book-item {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100%;
-            max-height: 60vh;
-        }
-
-        .book-pages-img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.15));
-            transition: transform 0.3s ease;
-        }
-
-        .book-pages-img:hover {
-            transform: scale(1.03);
-        }
-
-
-        /* --- SLIDE 5: POLAROIDS INFINITAS + REDES --- */
-        .polaroid-carousel-viewport {
-            background-color: #e9eff4;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 35px;
-        }
-
-        .polaroid-carousel-track {
-            display: flex;
-            flex-wrap: nowrap;
-            width: calc(330px * 12); 
-        }
-
-        @keyframes scrollPolaroids {
-            from { transform: translateX(0); }
-            to { transform: translateX(-1980px); } 
-        }
-
-        .polaroid-card {
-            background: #ffffff;
-            padding: 12px 12px 28px 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.07);
-            flex: 0 0 auto;
-            width: 300px;
-            margin: 0 15px;
-            position: relative;
-        }
-
-        .polaroid-card img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
-
-        .polaroid-card::before {
-            content: '';
-            position: absolute;
-            width: 75px;
-            height: 22px;
-            background-color: rgba(210, 200, 185, 0.35);
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%) rotate(-2deg);
-        }
-
-        .p-card-1 { transform: rotate(-3deg); }
-        .p-card-2 { transform: rotate(1deg); }
-        .p-card-3 { transform: rotate(-1.5deg); }
-        .p-card-4 { transform: rotate(2deg); }
-        .p-card-5 { transform: rotate(-1deg); }
-        .p-card-6 { transform: rotate(3deg); }
-
-        .gallery-footer { text-align: center; }
-
-        .instagram-link {
-            color: #0c3156;
-            font-size: 34px;
-            text-decoration: none;
-            transition: transform 0.3s ease;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-        .instagram-link:hover { transform: scale(1.15); }
-
-        .dedication-text {
-            color: #0c3156;
-            font-size: clamp(1.1rem, 1.6vw, 1.3rem);
-            letter-spacing: 0.5px;
-        }
-
-
-        /* --- DOCK REPRODUCTOR --- */
+        /* --- DOCK REPRODUCTOR UNIFICADO --- */
         .audio-player-dock {
             position: fixed;
             bottom: 20px;
@@ -545,18 +130,10 @@
         .audio-player-dock:hover { opacity: 1; }
         .audio-player-dock audio { display: block; height: 34px; width: 230px; }
 
-        /* --- CONTROL MÓVILES --- */
+        /* --- CONTROL DISPOSITIVOS MÓVILES --- */
         @media (max-width: 768px) {
-            .logo-btn { max-width: 90%; margin-bottom: 90px; }
+            .cover-title { font-size: 1.8rem; }
             .hint-text { bottom: 35px; font-size: 10px; }
-            .sand-label-card { padding: 25px 20px; width: 95%; }
-            .letter-card { padding: 25px; }
-            .letter-content-layout { flex-direction: column; gap: 15px; }
-            .letter-art-side { display: none; }
-            .envelope-button { width: 260px; height: 180px; }
-            .envelope-button::after { border-left-width: 130px; border-right-width: 130px; }
-            .book-gallery-container { flex-direction: column; gap: 20px; height: auto; max-height: none; }
-            .book-item { max-height: 35vh; width: 100%; }
             .audio-player-dock { right: 50%; transform: translateX(50%); }
         }
     </style>
@@ -569,147 +146,16 @@
         </audio>
     </div>
 
-    <div class="main-slider" id="mainSlider">
-
-        <section class="slide-section" id="sectionHero">
-            <div class="hero-video-container">
-                <video class="bg-video" autoplay muted loop playsinline>
-                    <source src="PLAYA.mp4" type="video/mp4">
-                </video>
-                
-                <img src="Copia de Ingrid.PNG" alt="azul Café" class="logo-btn" onclick="advanceSlide()">
-                
-                <div class="hint-text">
-                    <span>Presiona el logo para explorar</span>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-            </div>
-        </section>
-
-        <section class="slide-section quote-image-section" id="sectionAbout">
-            <div class="quote-img-container">
-                <h2 class="quote-overlay-title">Acerca de Azul Café</h2>
-                <img src="Portada.jpeg" alt="Portada de Azul Café" class="quote-img">
-                <button class="cafe-trigger-btn" onclick="openSandCard()"><i class="fa-solid fa-mug-hot"></i></button>
-            </div>
-
-            <div class="sand-label-card" id="sandCard">
-                <div class="close-sand-btn" onclick="closeSandCard()"><i class="fa-solid fa-xmark"></i></div>
-                <h3 class="sand-title-cursive">Un viaje entre el mar, el café y las distintas versiones de mí misma.</h3>
-                <div class="sand-divider"><i class="fa-regular fa-heart"></i></div>
-                <p class="sand-body-text">Azul Café es un proyecto editorial que reúne textos, ilustraciones y memorias inspiradas en el amor, la nostalgia, el crecimiento personal y la búsqueda de hogar.</p>
-                <p style="font-weight: 700; color: #163a5f;">Cada página es una conversación conmigo misma.</p>
-                
-                <div class="sand-icons-row">
-                    <div class="sand-icon-item"><i class="fa-solid fa-book-open"></i></div>
-                    <div class="sand-icon-item"><i class="fa-solid fa-mug-hot"></i></div>
-                    <div class="sand-icon-item"><i class="fa-solid fa-water"></i></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="slide-section who-am-i-section" id="whoSection">
-            <h2 class="who-title">Conoce más de la autora</h2>
-            
-            <div class="interactive-envelope-wrapper">
-                <div class="envelope-button" onclick="toggleLetter()"><i class="fa-solid fa-heart heart-icon"></i></div>
-
-                <div class="letter-card">
-                    <div class="letter-header">
-                        <div class="letter-chevron" onclick="toggleLetter()"><i class="fa-solid fa-chevron-left"></i> Volver</div>
-                    </div>
-                    
-                    <div class="letter-content-layout">
-                        <div class="letter-art-side">
-                            <i class="fa-solid fa-crow" style="font-size: 90px; color: #1a436d; margin-bottom: 10px;"></i>
-                            <span>~~~</span>
-                        </div>
-                        <div class="letter-body-side">
-                            <p>Soy hija, hermana, sobrina, nieta, estudiante, amiga...<br>muchas versiones de mí misma.</p>
-                            <p>Hay partes de mí que me han hecho quien soy hoy: algunas bonitas, otras difíciles, pero todas necesarias. Entendí que soy una Ingrid diferente para cada situación, and está bien así. Estoy orgullosa de cada una de ellas, de lo que fui y de lo que soy.</p>
-                            <p><strong>Me amo, en serio. Amo cada versión de mí.</strong></p>
-                            <p>También creo que las personas que me rodean me van formando poquito a poco, dejando algo en mí: energía, emociones, aprendizajes. Y sí, es bonito.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="slide-section book-showcase-section">
-            <div class="book-top-banner-sea">
-                <h2 class="banner-text">Muestra del libro</h2>
-            </div>
-            <div class="book-gallery-container">
-                <div class="book-item">
-                    <img src="Libro 1.jpeg" alt="Páginas del Libro 1" class="book-pages-img">
-                </div>
-                <div class="book-item">
-                    <img src="Libro 2.jpeg" alt="Páginas del Libro 2" class="book-pages-img">
-                </div>
-            </div>
-        </section>
-
-        <section class="slide-section polaroid-carousel-viewport">
-            <div class="polaroid-carousel-track" id="polaroidTrack">
-                <div class="polaroid-card p-card-1"><img src="1.jpeg"></div>
-                <div class="polaroid-card p-card-2"><img src="2.jpeg"></div>
-                <div class="polaroid-card p-card-3"><img src="3.jpeg"></div>
-                <div class="polaroid-card p-card-4"><img src="4.jpeg"></div>
-                <div class="polaroid-card p-card-5"><img src="5.jpeg"></div>
-                <div class="polaroid-card p-card-6"><img src="6.jpeg"></div>
-            </div>
-
-            <div class="gallery-footer">
-                <a href="https://www.instagram.com/itsmili.in?igsh=MW1ya2h5NHMxdGtxNg%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="instagram-link">
-                    <i class="fa-brands fa-instagram"></i>
-                </a>
-                <p class="dedication-text">- Ingrid Padilla</p>
-            </div>
-        </section>
-
+    <div class="cover-container">
+        <img src="Portada.jpeg" alt="Portada de Azul Café a pantalla completa" class="cover-image">
+        
+        <h1 class="cover-title">Azul Café</h1>
+        
+        <div class="hint-text">
+            <span>Explora</span>
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
     </div>
 
-    <script>
-        function advanceSlide() {
-            const slider = document.getElementById('mainSlider');
-            const slides = document.querySelectorAll('.slide-section');
-            const currentScroll = slider.scrollTop;
-            const height = window.innerHeight;
-            
-            const nextIndex = Math.round(currentScroll / height) + 1;
-            
-            if (nextIndex < slides.length) {
-                slides[nextIndex].scrollIntoView({ behavior: 'smooth' });
-            } else {
-                slider.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }
-
-        function openSandCard() { document.getElementById('sandCard').classList.add('active'); }
-        function closeSandCard() { document.getElementById('sandCard').classList.remove('active'); }
-        
-        function toggleLetter() { 
-            document.getElementById('whoSection').classList.toggle('active-letter'); 
-        }
-
-        function initCarousel() {
-            const track = document.getElementById('polaroidTrack');
-            const items = Array.from(track.querySelectorAll('.polaroid-card'));
-            
-            for (let i = items.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [items[i], items[j]] = [items[j], items[i]];
-            }
-            
-            const duplicates = items.map(el => el.cloneNode(true));
-            track.innerHTML = '';
-            items.forEach(el => track.appendChild(el));
-            duplicates.forEach(el => track.appendChild(el));
-            
-            track.style.animation = 'scrollPolaroids 35s linear infinite';
-        }
-
-        window.addEventListener('load', initCarousel);
-    </script>
 </body>
 </html>
