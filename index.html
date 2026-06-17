@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        /* --- CONFIGURACIÓN DE FUENTES (gandhi_sans_and_serif) --- */
+        /* --- CONFIGURACIÓN DE FUENTES (Gandhi Sans Únicamente) --- */
         @font-face {
             font-family: 'GandhiSans';
             src: url('fonts/GandhiSans-Regular.woff2') format('woff2'),
@@ -33,22 +33,6 @@
             font-weight: 400;
             font-style: italic;
         }
-        @font-face {
-            font-family: 'GandhiSerif';
-            src: url('fonts/GandhiSerif-Regular.woff2') format('woff2'),
-                 url('fonts/GandhiSerif-Regular.otf') format('opentype'),
-                 url('GandhiSerif-Regular.otf') format('opentype');
-            font-weight: 400;
-            font-style: normal;
-        }
-        @font-face {
-            font-family: 'GandhiSerif';
-            src: url('fonts/GandhiSerif-Bold.woff2') format('woff2'),
-                 url('fonts/GandhiSerif-Bold.otf') format('opentype'),
-                 url('GandhiSerif-Bold.otf') format('opentype');
-            font-weight: 700;
-            font-style: normal;
-        }
 
         /* --- RESET & BASE --- */
         * {
@@ -65,19 +49,19 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- JERARQUÍA DE IMPORTANCIA DE TIPOGRAFÍAS --- */
+        /* --- JERARQUÍA DE TIPOGRAFÍAS --- */
         
-        /* 1. Máxima Prioridad: Títulos Elegantes (Gandhi Serif Bold) */
+        /* 1. Máxima Prioridad: Títulos (Gandhi Sans Bold) */
         h1, h2, .who-title, .banner-text {
-            font-family: 'GandhiSerif', serif;
+            font-family: 'GandhiSans', sans-serif;
             font-weight: 700;
         }
         
-        /* Subtítulos Interactivos Especiales (Gandhi Serif Regular) */
+        /* Subtítulos Destacados Especiales (Gandhi Sans Bold) */
         .sand-title-cursive {
-            font-family: 'GandhiSerif', serif;
-            font-weight: 400;
-            font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+            font-family: 'GandhiSans', sans-serif;
+            font-weight: 700;
+            font-size: clamp(1.4rem, 2.5vw, 2rem);
             color: #1c446c;
             line-height: 1.4;
         }
@@ -122,7 +106,7 @@
             align-items: center;
         }
 
-        /* --- SLIDE 1: LOGO TOTALMENTE INTUITIVO COMO NAVEGADOR --- */
+        /* --- SLIDE 1: LOGO COMO NAVEGADOR --- */
         .hero-video-container {
             width: 100%;
             height: 100%;
@@ -142,7 +126,6 @@
             z-index: 1;
         }
 
-        /* Logo configurado como botón dinámico */
         .logo-btn {
             position: relative;
             z-index: 10;
@@ -186,7 +169,7 @@
         }
 
 
-        /* --- SLIDE 2: ILUSTRACIÓN DE LA CITA + INTERFAZ ARENA --- */
+        /* --- SLIDE 2: CITA + INTERFAZ ARENA --- */
         .quote-image-section {
             width: 100%;
             height: 100vh;
@@ -479,7 +462,6 @@
 
         .polaroid-card img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
 
-        /* Estilización simulada de cinta adhesiva */
         .polaroid-card::before {
             content: '';
             position: absolute;
@@ -517,7 +499,7 @@
         }
 
 
-        /* --- DOCK COMPONENTE REPRODUCTOR --- */
+        /* --- DOCK REPRODUCTOR --- */
         .audio-player-dock {
             position: fixed;
             bottom: 20px;
@@ -533,7 +515,7 @@
         .audio-player-dock:hover { opacity: 1; }
         .audio-player-dock audio { display: block; height: 34px; width: 230px; }
 
-        /* --- CONTROL DISPOSITIVOS MÓVILES --- */
+        /* --- CONTROL MÓVILES --- */
         @media (max-width: 768px) {
             .logo-btn { max-width: 90%; margin-bottom: 90px; }
             .hint-text { bottom: 35px; font-size: 10px; }
@@ -583,7 +565,7 @@
                 <h3 class="sand-title-cursive">Un viaje entre el mar, el café y las distintas versiones de mí misma.</h3>
                 <div class="sand-divider"><i class="fa-regular fa-heart"></i></div>
                 <p class="sand-body-text">Azul Café es un proyecto editorial que reúne textos, ilustraciones y memorias inspiradas en el amor, la nostalgia, el crecimiento personal y la búsqueda de hogar.</p>
-                <p style="font-weight: 700; color: #163a5f;">Cada página es una conversación conmigo misma.</p>
+                <p style="font-weight: 700; color: #163a5f;">Cada página es una conversation conmigo misma.</p>
                 
                 <div class="sand-icons-row">
                     <div class="sand-icon-item"><i class="fa-solid fa-book-open"></i></div>
@@ -650,20 +632,17 @@
     </div>
 
     <script>
-        // Función inteligente de avance interactivo por clic en Logo
         function advanceSlide() {
             const slider = document.getElementById('mainSlider');
             const slides = document.querySelectorAll('.slide-section');
             const currentScroll = slider.scrollTop;
             const height = window.innerHeight;
             
-            // Determina la siguiente posición exacta
             const nextIndex = Math.round(currentScroll / height) + 1;
             
             if (nextIndex < slides.length) {
                 slides[nextIndex].scrollIntoView({ behavior: 'smooth' });
             } else {
-                // Al llegar al final de los bloques, retorna con suavidad a la portada
                 slider.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
@@ -675,12 +654,10 @@
             document.getElementById('whoSection').classList.toggle('active-letter'); 
         }
 
-        // Construcción y mezcla aleatoria del carrusel infinito de memorias
         function initCarousel() {
             const track = document.getElementById('polaroidTrack');
             const items = Array.from(track.querySelectorAll('.polaroid-card'));
             
-            // Mezclador (Shuffle)
             for (let i = items.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [items[i], items[j]] = [items[j], items[i]];
