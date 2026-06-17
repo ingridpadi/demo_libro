@@ -73,7 +73,7 @@
         }
 
         /* 3. Estructuras de Interfaz / Destacados (Gandhi Sans Bold) */
-        .hint-text, strong, .letter-header, .close-sand-btn, .book-label {
+        .hint-text, strong, .letter-header, .close-sand-btn {
             font-family: 'GandhiSans', sans-serif;
             font-weight: 700;
         }
@@ -383,7 +383,7 @@
         .active-letter .letter-card { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; position: relative; z-index: 20; }
 
 
-        /* --- SLIDE 4: GALERÍA DE PÁGINAS DEL LIBRO (MODIFICADO) --- */
+        /* --- SLIDE 4: GALERÍA DE PÁGINAS DEL LIBRO --- */
         .book-showcase-section {
             display: flex;
             flex-direction: column;
@@ -427,15 +427,7 @@
             flex-direction: column;
             align-items: center;
             height: 100%;
-            max-height: 55vh;
-        }
-
-        .book-label {
-            color: #0c3156;
-            font-size: 1.1rem;
-            margin-bottom: 12px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            max-height: 60vh;
         }
 
         .book-pages-img {
@@ -549,7 +541,7 @@
             .envelope-button { width: 260px; height: 180px; }
             .envelope-button::after { border-left-width: 130px; border-right-width: 130px; }
             .book-gallery-container { flex-direction: column; gap: 20px; height: auto; max-height: none; }
-            .book-item { max-height: 30vh; width: 100%; }
+            .book-item { max-height: 35vh; width: 100%; }
             .audio-player-dock { right: 50%; transform: translateX(50%); }
         }
     </style>
@@ -633,11 +625,9 @@
             </div>
             <div class="book-gallery-container">
                 <div class="book-item">
-                    <span class="book-label">Libro 1</span>
                     <img src="Libro 1.jpeg" alt="Páginas del Libro 1" class="book-pages-img">
                 </div>
                 <div class="book-item">
-                    <span class="book-label">Libro 2</span>
                     <img src="Libro 2.jpeg" alt="Páginas del Libro 2" class="book-pages-img">
                 </div>
             </div>
