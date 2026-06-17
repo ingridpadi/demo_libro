@@ -51,7 +51,7 @@
 
         /* --- JERARQUÍA DE TIPOGRAFÍAS --- */
         
-        /* 1. Máxima Prioridad: Títulos (Gandhi Sans Bold) */
+        /* 1. Títulos (Gandhi Sans Bold) */
         h1, h2, .who-title, .banner-text {
             font-family: 'GandhiSans', sans-serif;
             font-weight: 700;
@@ -73,7 +73,7 @@
         }
 
         /* 3. Estructuras de Interfaz / Destacados (Gandhi Sans Bold) */
-        .hint-text, strong, .letter-header, .close-sand-btn {
+        .hint-text, strong, .letter-header, .close-sand-btn, .book-label {
             font-family: 'GandhiSans', sans-serif;
             font-weight: 700;
         }
@@ -378,13 +378,12 @@
         .letter-header { display: flex; justify-content: space-between; align-items: center; width: 100%; }
         .letter-chevron { font-size: 20px; cursor: pointer; }
 
-        /* Estados de animación para el sobre */
         .active-letter .envelope-button { opacity: 0; pointer-events: none; transform: scale(0.6); }
         .active-letter .who-title { opacity: 0; transform: translateY(-15px); }
         .active-letter .letter-card { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; position: relative; z-index: 20; }
 
 
-        /* --- SLIDE 4: REVELACIÓN DE PÁGINAS DEL LIBRO --- */
+        /* --- SLIDE 4: GALERÍA DE PÁGINAS DEL LIBRO (MODIFICADO) --- */
         .book-showcase-section {
             display: flex;
             flex-direction: column;
@@ -410,21 +409,45 @@
             text-align: center;
         }
 
-        .book-display-container {
+        .book-gallery-container {
             width: 100%;
             height: 75vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            gap: 40px;
             padding: 35px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .book-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            max-height: 55vh;
+        }
+
+        .book-label {
+            color: #0c3156;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .book-pages-img {
             width: 100%;
             height: 100%;
-            max-width: 1100px;
             object-fit: contain;
-            filter: drop-shadow(0 20px 35px rgba(0,0,0,0.12));
+            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.15));
+            transition: transform 0.3s ease;
+        }
+
+        .book-pages-img:hover {
+            transform: scale(1.03);
         }
 
 
@@ -525,6 +548,8 @@
             .letter-art-side { display: none; }
             .envelope-button { width: 260px; height: 180px; }
             .envelope-button::after { border-left-width: 130px; border-right-width: 130px; }
+            .book-gallery-container { flex-direction: column; gap: 20px; height: auto; max-height: none; }
+            .book-item { max-height: 30vh; width: 100%; }
             .audio-player-dock { right: 50%; transform: translateX(50%); }
         }
     </style>
@@ -565,7 +590,7 @@
                 <h3 class="sand-title-cursive">Un viaje entre el mar, el café y las distintas versiones de mí misma.</h3>
                 <div class="sand-divider"><i class="fa-regular fa-heart"></i></div>
                 <p class="sand-body-text">Azul Café es un proyecto editorial que reúne textos, ilustraciones y memorias inspiradas en el amor, la nostalgia, el crecimiento personal y la búsqueda de hogar.</p>
-                <p style="font-weight: 700; color: #163a5f;">Cada página es una conversation conmigo misma.</p>
+                <p style="font-weight: 700; color: #163a5f;">Cada página es una conversación conmigo misma.</p>
                 
                 <div class="sand-icons-row">
                     <div class="sand-icon-item"><i class="fa-solid fa-book-open"></i></div>
@@ -604,10 +629,17 @@
 
         <section class="slide-section book-showcase-section">
             <div class="book-top-banner-sea">
-                <h2 class="banner-text">Conoce más de mí en mi libro</h2>
+                <h2 class="banner-text">Muestra del libro</h2>
             </div>
-            <div class="book-display-container">
-                <img src="azul cafe.jpeg" alt="Páginas del Libro" class="book-pages-img">
+            <div class="book-gallery-container">
+                <div class="book-item">
+                    <span class="book-label">Libro 1</span>
+                    <img src="Libro 1.jpeg" alt="Páginas del Libro 1" class="book-pages-img">
+                </div>
+                <div class="book-item">
+                    <span class="book-label">Libro 2</span>
+                    <img src="Libro 2.jpeg" alt="Páginas del Libro 2" class="book-pages-img">
+                </div>
             </div>
         </section>
 
