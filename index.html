@@ -52,7 +52,7 @@
         /* --- JERARQUÍA DE TIPOGRAFÍAS --- */
         
         /* 1. Títulos (Gandhi Sans Bold) */
-        h1, h2, .who-title, .banner-text {
+        h1, h2, .who-title, .banner-text, .quote-overlay-title {
             font-family: 'GandhiSans', sans-serif;
             font-weight: 700;
         }
@@ -169,7 +169,7 @@
         }
 
 
-        /* --- SLIDE 2: CITA + INTERFAZ ARENA --- */
+        /* --- SLIDE 2: PORTADA + INTERFAZ ARENA (ACTUALIZADO) --- */
         .quote-image-section {
             width: 100%;
             height: 100vh;
@@ -190,6 +190,21 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
+        }
+
+        /* Texto superpuesto sobre la portada */
+        .quote-overlay-title {
+            position: absolute;
+            top: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 15;
+            color: #0c3156;
+            font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+            text-align: center;
+            width: 90%;
+            text-shadow: 0 2px 10px rgba(255,255,255,0.4);
+            pointer-events: none;
         }
 
         .cafe-trigger-btn {
@@ -571,9 +586,10 @@
             </div>
         </section>
 
-        <section class="slide-section quote-image-section">
+        <section class="slide-section quote-image-section" id="sectionAbout">
             <div class="quote-img-container">
-                <img src="cita.jpeg" alt="Ilustración Cita" class="quote-img">
+                <h2 class="quote-overlay-title">Acerca de Azul Café</h2>
+                <img src="Portada.jpeg" alt="Portada de Azul Café" class="quote-img">
                 <button class="cafe-trigger-btn" onclick="openSandCard()"><i class="fa-solid fa-mug-hot"></i></button>
             </div>
 
